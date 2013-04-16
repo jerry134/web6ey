@@ -42,3 +42,5 @@ gem 'twitter-bootstrap-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'simple_form'
