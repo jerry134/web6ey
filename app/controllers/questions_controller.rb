@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /questions
   # GET /questions.json
   def index
@@ -13,7 +15,6 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question = Question.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,6 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.json
   def new
-    @question = Question.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,11 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
-    @question = Question.find(params[:id])
   end
 
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(params[:question])
 
     respond_to do |format|
       if @question.save
@@ -56,7 +54,6 @@ class QuestionsController < ApplicationController
   # PUT /questions/1
   # PUT /questions/1.json
   def update
-    @question = Question.find(params[:id])
 
     respond_to do |format|
       if @question.update_attributes(params[:question])
@@ -72,7 +69,6 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
 
     respond_to do |format|

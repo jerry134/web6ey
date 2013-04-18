@@ -20,6 +20,8 @@
         <td><%= question.content %></td>
         <td><%=l question.created_at %></td>
         <td>
+
+	<% if can? :update, @question %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_question_path(question), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -27,6 +29,7 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
+	<% end %>
         </td>
       </tr>
     <% end %>
