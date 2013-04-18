@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.11'
 
@@ -9,6 +10,8 @@ gem 'mysql2'
 
 gem 'execjs'
 gem 'therubyracer'
+
+gem "cancan"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,7 +45,6 @@ gem 'twitter-bootstrap-rails'
 
 # To use debugger
 # gem 'debugger'
-
 gem 'simple_form'
 
 gem 'devise'
