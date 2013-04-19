@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.order("title").page(params[:page]).per_page(5)
 
     respond_to do |format|
       format.html # index.html.erb
