@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :user_roles
   has_many :roles, :through => :user_roles
+  has_many :questions
 
   def has_role?(role)
       roles.any? { |r| r.name == role.to_s }
