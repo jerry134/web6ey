@@ -4,6 +4,7 @@
   <%= f.input :title %>
   <%= f.input :content, input_html: { cols: 40, rows: 20} %>
   <%= f.input :tag_list %>
+  <%=# @question.owner_username %>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
