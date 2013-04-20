@@ -24,14 +24,10 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li><%= link_to "Browse Questions", questions_path %></li>
-            <li><%= link_to "Price List" %></li>
             <li><%= link_to "Contact Us" %></li>
-            <li><%= link_to "Cart" %></li>
             <%= render "common/user_nav" %>
           </ul>
         </div>
-   
-
       </div>
     </div>
   </div>
@@ -43,7 +39,7 @@
         <%= msg %>
       </div>
     <% end %>
-
+    <%= render(:partial => "layouts/alert")%>
     <div class="row">
       <div class="span9"><%= yield %></div>
       <div class="span3">
@@ -53,6 +49,4 @@
     </div>
   </div>
 </body>
-
-
 </html>
