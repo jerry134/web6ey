@@ -36,3 +36,11 @@ _yardoc
 #
 # # Ignore the database.yml
 /config/database.yml
+# Ignore other unneeded files.
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+/db/schema.rb

@@ -4,7 +4,11 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.order("title").page(params[:page]).per_page(5)
+    if params[:tag]
+      @questions = Question.tagged_with(params[:tag]).page(params[:page]).per_page(5)
+    else
+      @questions = Question.order("title").page(params[:page]).per_page(5)
+    end 
 
     respond_to do |format|
       format.html # index.html.erb
