@@ -12,6 +12,7 @@ gem "cancan"
 gem 'simple_form'
 gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
+gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
 
 group :assets do
