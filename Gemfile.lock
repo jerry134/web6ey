@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 8bd159c7a484093fde84beaa9e6398f25ddacf09
+  specs:
+    annotate (2.6.0.beta1)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -173,6 +181,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  annotate!
   bootstrap-will_paginate
   cancan
   coffee-rails (~> 3.2.1)
