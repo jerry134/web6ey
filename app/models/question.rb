@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  content    :text             default(""), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+
 class Question < ActiveRecord::Base
 
   validates_presence_of :title, :content
