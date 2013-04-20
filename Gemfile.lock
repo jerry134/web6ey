@@ -32,6 +32,8 @@ GEM
       rails (~> 3.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.4)
     cancan (1.6.9)
     coderay (1.0.9)
@@ -171,6 +173,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  bootstrap-will_paginate
   cancan
   coffee-rails (~> 3.2.1)
   devise
