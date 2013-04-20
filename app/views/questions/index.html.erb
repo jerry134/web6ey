@@ -10,6 +10,7 @@
       <th><%= model_class.human_attribute_name(:content) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%= model_class.human_attribute_name(:tag_list) %></th>
+      <th><%= '提问者'  %></th>
       <% if can? :update, @question %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
       <% end %>
@@ -23,6 +24,7 @@
         <td><%= question.content %></td>
         <td><%= question.created_at %></td>
         <td><%= raw question.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+        <td><%= raw question.owner_username%></td>
         <td>
 
 	<% if can? :update, @question %>
