@@ -1,4 +1,7 @@
 Web6bey::Application.routes.draw do
+  resources :tags
+
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
   resources :questions
