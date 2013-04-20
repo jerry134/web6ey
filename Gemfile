@@ -5,8 +5,6 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 gem 'pg', group: :production
-gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git', group: :development
-gem 'rails-i18n'
 
 gem 'execjs'
 gem 'devise'
@@ -35,6 +33,7 @@ group :development do
   gem 'thin'
   gem 'pry-nav'
   gem 'quiet_assets'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 end
 
 group :development, :test do
