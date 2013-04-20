@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 gem 'mysql2'
 gem 'pg', group: :production
