@@ -26,9 +26,10 @@ class User < ActiveRecord::Base
          :validatable, :authentication_keys => [:login]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login, :image
   # attr_accessible :title, :body
   attr_accessor :login
+  mount_uploader :image, ImageUploader
   
 
   has_many :user_roles

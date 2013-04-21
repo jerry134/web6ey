@@ -14,6 +14,7 @@ gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
+gem 'carrierwave'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
