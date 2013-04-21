@@ -35,6 +35,12 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :user_roles
   has_many :questions
 
+  before_create :update_roles_of_user
+  def update_roles_of_user
+    self.roles << Role.find_by_name('member') if self.roles.blank?
+  end
+  private :update_roles_of_user
+
   def has_role?(role)
       roles.any? { |r| r.name == role.to_s }
   end
