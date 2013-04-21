@@ -1,3 +1,4 @@
 <% @answers.each do |answer| %>
   <%= simple_format answer.content%>
+  <%= simple_format answer.user.username%>
 <% end %>

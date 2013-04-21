@@ -11,7 +11,8 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(params[:answer])
-    if @answer.save
+    if current_user.answers << @answer
+    #if @answer.save
       redirect_to @question , notice: "answer question seccess"
     else
       render :new
