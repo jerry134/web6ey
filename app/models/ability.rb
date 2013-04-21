@@ -7,11 +7,12 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :member
-      can :create, :Question
-      can :update, :Question do |question|
-      # add user later
-      # question.try(:user) == user || user.has_role?(:admin) 
-      end
+      can :read, :all
+      can [:create, :update], Question
+      #can :update, :Question do |question|
+      ##add user later
+      ##question.try(:user) == user || user.has_role?(:admin) 
+      #end
     else
       can :read, :all
     end
