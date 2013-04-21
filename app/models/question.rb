@@ -17,6 +17,7 @@ class Question < ActiveRecord::Base
   attr_accessible :content, :title, :tag_list
   acts_as_taggable
   belongs_to :user
+  has_many :answers
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
   scope :owner, joins(:user)
 

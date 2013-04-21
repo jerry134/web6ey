@@ -5,8 +5,6 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
-require 'pry'
-require 'pry-remote'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
