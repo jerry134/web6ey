@@ -1,7 +1,7 @@
 <ul class="nav pull-right" id="userbar">        
      <li class="dropdown" id="user_menu">
      <% if user_signed_in? %>
-         <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %>
+         <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= gravatar_for current_user %> <%= current_user.username %>
 		<b class='caret'></b>
 	 </a>
          <ul class="dropdown-menu">

@@ -1,6 +1,5 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
-
 gem 'rails', '3.2.13'
 
 gem 'mysql2'
@@ -16,6 +15,7 @@ gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
+gem 'gravatar_image_tag'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
