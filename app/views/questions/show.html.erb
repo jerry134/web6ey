@@ -14,12 +14,12 @@
   <%= link_to t('.back', :default => t("helpers.links.back")),
               questions_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_question_path(@question), :class => 'btn' %>
+              edit_question_path(@question), :class => 'btn' if can? :update, @question %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               question_path(@question),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-danger' if can? :destroy, @question %>
 </div>
 
 <%= render "answers/answers"%>
