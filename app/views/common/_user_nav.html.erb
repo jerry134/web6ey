@@ -1,17 +1,16 @@
-<ul class="nav pull-right" id="userbar">        
-     <li class="dropdown" id="user_menu">
-     <% if user_signed_in? %>
-         <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %>
-		<b class='caret'></b>
-	 </a>
-         <ul class="dropdown-menu">
-         <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-         <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-         </ul>
-     <% else %>
-         <li><%= link_to "Sign up", new_user_registration_path %></li>
-         <li><%= link_to "Login", new_user_session_path %></li>
-     <% end %>
-
-     </li>
+<ul class="nav pull-right" id="userbar">
+  <li class="dropdown" id="user_menu">
+    <% if user_signed_in? %>
+      <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.image, class: "img-rounded" %> <%= current_user.username %>
+        <b class='caret'></b>
+      </a>
+      <ul class="dropdown-menu">
+      <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></lia>
+      </ul>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+      <li><%= link_to "Login", new_user_session_path %></li>
+    <% end %>
+  </li>
 </ul>
