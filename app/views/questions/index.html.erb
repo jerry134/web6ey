@@ -22,7 +22,7 @@
         <td><%= link_to question.id, question_path(question) %></td>
         <td><%= question.title %></td>
         <td><%= question.content %></td>
-        <td><%= question.created_at %></td>
+        <td><%= time_tag question.created_at %></td>
         <td><%= raw question.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
         <td><%= raw question.owner_username%></td>
         <td>
