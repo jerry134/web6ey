@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
   def create
 
     respond_to do |format|
+      @question.user = current_user
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render json: @question, status: :created, location: @question }
