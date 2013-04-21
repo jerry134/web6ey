@@ -8,11 +8,10 @@ class Ability
       can :manage, :all
     elsif user.has_role? :member
       can :read, :all
-      can [:create, :update], Question
-      #can :update, :Question do |question|
-      ##add user later
-      ##question.try(:user) == user || user.has_role?(:admin) 
-      #end
+      can :create,  Question
+      can [:update, :destroy], Question do |question|
+        question.try(:user) == user || user.has_role?(:admin) 
+      end
     else
       can :read, :all
     end
