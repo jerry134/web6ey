@@ -19,6 +19,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @answers = @question.answers
+    @answer = Answer.new
 
     respond_to do |format|
       format.html # show.html.erb
