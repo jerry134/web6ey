@@ -17,12 +17,13 @@
 #  updated_at             :datetime         not null
 #
 
+# encoding : utf-8
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, 
-         :recoverable, :rememberable, :trackable, 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable,
          :validatable, :authentication_keys => [:login]
 
   # Setup accessible (or protected) attributes for your model
@@ -30,7 +31,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessor :login
   mount_uploader :image, ImageUploader
-  
+
 
   has_many :user_roles
   has_many :roles, :through => :user_roles
