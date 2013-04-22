@@ -1,0 +1,22 @@
+zh-CN:
+  activerecord:
+    models:
+      user: "用户"
+      question: "问题"
+      answer: "回答"
+    attributes:
+      user:
+        login: "用户名"
+        username: "用户名"
+        email: "Email"
+        password: "密码"
+        password_confirmation: "确认密码"
+        current_password: "当前密码"
+        remember_me: "记住我"
+        created_at: "注册时间"
+        last_sign_in_at: "上次登录时间"
+      question:
+        title: "标题"
+        content: "内容"
+        tag_list: "标签"
+        created_at: "提问时间"
