@@ -1,4 +1,3 @@
-# encoding: utf-8
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create, :evaluate]
   load_and_authorize_resource only: [:update, :edit, :destroy]
@@ -37,7 +36,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, notice: I18n.t("flash.actions.create.notice") }
         format.json { render json: @question, status: :created, location: @question }
       else
         format.html { render action: "new" }
@@ -51,7 +50,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update_attributes(params[:question])
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to @question, notice: I18n.t("flash.actions.update.notice") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -64,16 +63,15 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
     @question.destroy
-    flash[:success] = "问题删除成功"
-    redirect_to questions_url
+    redirect_to questions_url, notice: I18n.t("flash.actions.destory.notice")
   end
 
   def evaluate
     if QuestionEvaluation.where(user_id: current_user.id ,question_id: params[:question_id]).size == 0
      QuestionEvaluation.create(user_id: current_user.id,question_id: params[:question_id],score: params[:score])
-      flash[:success] = "恭喜您,评价成功"
+      flash[:success] = I18n.t("flash.questions.evaluate.notice")
     else
-      flash[:error] = "非常抱歉，一个问题您只能评价一次！"
+      flash[:error] = I18n.t("flash.questions.evaluate.alert")
     end
     redirect_to "/questions/"+params[:question_id]
   end
