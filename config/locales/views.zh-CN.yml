@@ -14,3 +14,18 @@ zh-CN:
       create:
         alert: "只有管理员才能创建新标签。"
     access_denied: "操作被拒绝，你可能没有权限或未登录。"
+
+  helpers:
+    actions: "操作"
+    links:
+      confirm: "您确定吗？"
+      new: "新建"
+      destroy: "删除"
+      index: "清单"
+      edit: "编辑"
+      show: "显示"
+      back: "后退"
+      cancel: "撤销"
+      detail: "详情"
+      all: "所有"
+      more: "更多..."
