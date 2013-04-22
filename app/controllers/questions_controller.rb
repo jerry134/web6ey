@@ -71,8 +71,10 @@ class QuestionsController < ApplicationController
   def evaluate
     if QuestionEvaluation.where(user_id: current_user.id ,question_id: params[:question_id]).size == 0
      QuestionEvaluation.create(user_id: current_user.id,question_id: params[:question_id],score: params[:score])
+      flash[:success] = "恭喜您,评价成功"
     else
-
+      flash[:error] = "非常抱歉，一个问题您只能评价一次！"
     end
+    redirect_to "/questions/"+params[:question_id]
   end
 end
