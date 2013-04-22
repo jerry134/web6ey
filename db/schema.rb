@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(:version => 20130422104303) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
+  create_table "tags", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+=======
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -60,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130422104303) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+>>>>>>> web6bey/master
   end
 
   create_table "user_roles", :force => true do |t|
