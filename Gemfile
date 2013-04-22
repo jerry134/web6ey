@@ -27,7 +27,6 @@ group :assets do
 end
 
 group :development do
-  gem 'pry'
   gem 'pry-remote'
   gem 'pry-stack_explorer'
   gem 'pry-debugger'
@@ -38,6 +37,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec-rails', "~> 2.0"
   gem 'factory_girl_rails'
 end

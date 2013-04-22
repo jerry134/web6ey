@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  load_and_authorize_resource
+  before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
+  load_and_authorize_resource only: [:update, :edit, :destroy] 
 
   # GET /questions
   # GET /questions.json
@@ -19,6 +20,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question = Question.find(params[:id])
     @answers = @question.answers
     @answer = Answer.new
 
@@ -31,7 +33,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.json
   def new
-
+    @question = Question.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @question }
@@ -39,8 +41,6 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1/edit
-  def edit
-  end
 
   # POST /questions
   # POST /questions.json
@@ -61,7 +61,6 @@ class QuestionsController < ApplicationController
   # PUT /questions/1
   # PUT /questions/1.json
   def update
-
     respond_to do |format|
       if @question.update_attributes(params[:question])
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -77,10 +76,7 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
     @question.destroy
-
-    respond_to do |format|
-      format.html { redirect_to questions_url }
-      format.json { head :no_content }
+    flash[:success] = "问题删除成功"
+    redirect_to questions_url 
     end
   end
-end
