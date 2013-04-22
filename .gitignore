@@ -26,13 +26,18 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-Gemfile.lock
 .sass-cache
-public/assets
+
+# Ignore uploads
+/public/uploads
+
+# cloudfoundry
+/public/assets
+/vendor/cache
 
 # YARD artifacts
 .yardoc
 _yardoc
-#
-# # Ignore the database.yml
+
+# Ignore the database.yml
 /config/database.yml

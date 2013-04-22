@@ -1,7 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 gem 'mysql2'
 gem 'pg', group: :production
@@ -12,6 +12,9 @@ gem "cancan"
 gem 'simple_form'
 gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
+gem 'bootstrap-will_paginate'
+gem 'acts-as-taggable-on'
+gem 'carrierwave'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -24,13 +27,18 @@ group :assets do
 end
 
 group :development do
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
   gem 'thin'
   gem 'pry-nav'
   gem 'quiet_assets'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'pry'
+  gem 'rspec-rails', "~> 2.0"
   gem 'factory_girl_rails'
 end
 

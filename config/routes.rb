@@ -1,10 +1,17 @@
 Web6bey::Application.routes.draw do
-  resources :tags
+  get "answers/index"
 
+  get "answers/new"
+
+  get "tag/index"
+
+  get 'tags/:tag', to: 'questions#index', as: :tag
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 
 
   # The priority is based upon order of creation:
