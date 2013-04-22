@@ -1,0 +1,35 @@
+zh-CN:
+  flash:
+    actions:
+      create:
+        notice: "追加成功。"
+        alert: "追加失败。"
+      update:
+        notice: "更新成功。"
+        alert: "更新失败。"
+      destory:
+        notice: "删除成功。"
+        alert: "删除失败。"
+    tag:
+      create:
+        alert: "只有管理员才能创建新标签。"
+    questions:
+      evaluate:
+        notice: "恭喜您,评价成功"
+        alert: "非常抱歉，一个问题您只能评价一次！"
+    access_denied: "操作被拒绝，你可能没有权限或未登录。"
+
+  helpers:
+    actions: "操作"
+    links:
+      confirm: "您确定吗？"
+      new: "新建"
+      destroy: "删除"
+      index: "清单"
+      edit: "编辑"
+      show: "显示"
+      back: "后退"
+      cancel: "撤销"
+      detail: "详情"
+      all: "所有"
+      more: "更多..."
