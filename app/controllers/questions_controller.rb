@@ -1,3 +1,4 @@
+# encoding: utf-8
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
   load_and_authorize_resource only: [:update, :edit, :destroy] 
