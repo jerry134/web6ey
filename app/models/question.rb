@@ -34,4 +34,11 @@ class Question < ActiveRecord::Base
     end
   end
   private :validation_of_tag_list
+
+  def self.viewed(question, cookies)
+    unless cookies[question.id]
+      cookies.permanent[question.id] = true
+      update_counters question.id, viewed_count: 1
+    end
+  end
 end
