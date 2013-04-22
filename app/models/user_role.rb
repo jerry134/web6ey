@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #
 
+#encoding : utf-8
 class UserRole < ActiveRecord::Base
   # attr_accessible :title, :body
 

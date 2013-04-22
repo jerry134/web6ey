@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Ability
   include CanCan::Ability
 
@@ -10,7 +11,7 @@ class Ability
       can :read, :all
       can :create,  Question
       can [:update, :destroy], Question do |question|
-        question.try(:user) == user || user.has_role?(:admin) 
+        question.try(:user) == user || user.has_role?(:admin)
       end
     else
       can :read, :all

@@ -4,6 +4,9 @@ Web6bey::Application.routes.draw do
 
   resources :questions do
     resources :answers
+    collection do
+      post 'evaluate'
+    end
   end
 
 
