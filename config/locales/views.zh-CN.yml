@@ -1,0 +1,16 @@
+zh-CN:
+  flash:
+    actions:
+      create:
+        notice: "追加成功。"
+        alert: "追加失败。"
+      update:
+        notice: "更新成功。"
+        alert: "更新失败。"
+      destory:
+        notice: "删除成功。"
+        alert: "删除失败。"
+    tag:
+      create:
+        alert: "只有管理员才能创建新标签。"
+    access_denied: "操作被拒绝，你可能没有权限或未登录。"
