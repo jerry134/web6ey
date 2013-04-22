@@ -1,3 +1,4 @@
+# encoding: utf-8
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
   load_and_authorize_resource only: [:update, :edit, :destroy] 
@@ -10,34 +11,21 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.order("title").page(params[:page]).per_page(5)
     end 
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @questions }
-    end
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
     @question = Question.find(params[:id])
+    Question.viewed(@question, cookies)
     @answers = @question.answers
     @answer = Answer.new
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @question }
-    end
   end
 
   # GET /questions/new
   # GET /questions/new.json
   def new
     @question = Question.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @question }
-    end
   end
 
   # GET /questions/1/edit
@@ -78,5 +66,5 @@ class QuestionsController < ApplicationController
     @question.destroy
     flash[:success] = "问题删除成功"
     redirect_to questions_url 
-    end
   end
+end
