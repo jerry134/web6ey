@@ -1,7 +1,7 @@
 # encoding: utf-8
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
-  load_and_authorize_resource only: [:update, :edit, :destroy] 
+  load_and_authorize_resource only: [:update, :edit, :destroy]
 
   # GET /questions
   # GET /questions.json
@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
       @questions = Question.tagged_with(params[:tag]).page(params[:page]).per_page(5)
     else
       @questions = Question.order("title").page(params[:page]).per_page(5)
-    end 
+    end
   end
 
   # GET /questions/1
@@ -65,6 +65,14 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     flash[:success] = "问题删除成功"
-    redirect_to questions_url 
+    redirect_to questions_url
+  end
+
+  def evaluate
+    if QuestionEvaluation.where(user_id: current_user.id ,question_id: params[:question_id]).size == 0
+     QuestionEvaluation.create(user_id: current_user.id,question_id: params[:question_id],score: params[:score])
+    else
+
+    end
   end
 end

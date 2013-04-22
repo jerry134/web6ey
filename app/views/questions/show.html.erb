@@ -22,5 +22,8 @@
               :class => 'btn btn-danger' if can? :destroy, @question %>
 </div>
 
+<%= button_to 'good',evaluate_questions_path(question_id: @question.id , score: 1)%>
+<%= button_to 'bad',evaluate_questions_path(question_id: @question.id , score: 0)%>
+
 <%= render "answers/answers"%>
 <%= render "answers/form"%>
