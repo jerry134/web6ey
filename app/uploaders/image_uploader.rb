@@ -10,6 +10,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
+
+  def default_url
+    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  end
+
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
