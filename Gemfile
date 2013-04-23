@@ -3,6 +3,7 @@ source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
 
+gem 'thin'
 gem 'mysql2'
 gem 'pg', group: :production
 
@@ -30,7 +31,6 @@ group :development do
   gem 'pry-remote'
   gem 'pry-stack_explorer'
   gem 'pry-debugger'
-  gem 'thin'
   gem 'pry-nav'
   gem 'quiet_assets'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
