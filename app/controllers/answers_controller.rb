@@ -13,15 +13,13 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(params[:answer])
     if current_user.answers << @answer
     #if @answer.save
-      redirect_to @question , notice: "answer question seccess"
+      redirect_to @question , notice: I18n.t("flash.actions.create.notice")
     else
       render :new
     end
   end
 
-
-private
-  
+  private
   def load_question
     @question = Question.find(params[:question_id])
   end
