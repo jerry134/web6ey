@@ -1,3 +1,5 @@
 zh-CN:
   hello: "你好"
   owner_name: "提问者"
+  counter_of_questions: "社区目前有%{number}个问题"
+

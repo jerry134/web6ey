@@ -6,6 +6,7 @@ gem 'rails', '3.2.13'
 gem 'thin'
 gem 'mysql2'
 gem 'pg', group: :production
+gem 'fog', "~> 1.3.1"
 
 gem 'execjs'
 gem 'devise'
