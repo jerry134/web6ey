@@ -3,11 +3,13 @@ Web6bey::Application.routes.draw do
 
   get "answers/new"
 
-  get "tag/index"
 
   get 'tags/:tag', to: 'questions#index', as: :tag
+  
+  resources :tags, only: :index
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+  
 
   resources :questions do
     resources :answers

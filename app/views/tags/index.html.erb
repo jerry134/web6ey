@@ -1,0 +1,5 @@
+<div>
+<% tag_cloud @tags, %w[s m l] do |tag, css_class|%>
+	<%= link_to tag.name, tag_path(tag.name), class: css_class%>
+<% end %>
+</div>
