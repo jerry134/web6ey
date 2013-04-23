@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :answer do
     content "MyText"
-    question_id 1
     accept false
-    user_id 1
+    question
+    user
   end
 end

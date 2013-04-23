@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
   attr_accessor :login
   mount_uploader :image, ImageUploader
 
-
   has_many :user_roles
   has_many :roles, :through => :user_roles
   has_many :questions

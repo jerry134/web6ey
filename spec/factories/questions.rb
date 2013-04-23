@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :question do
     title "question"
-    context "mycontext"
-    user_id 1
+    content "mycontext"
+    tag_list ""
+    user
   end
 end
