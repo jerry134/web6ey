@@ -9,7 +9,7 @@ describe Ability do
     it { should_not be_able_to(:create, Answer) }
   end
 
-  it "when user has a admin role" do
+  it "when user signed in with a admin role" do
     user = create :user
     admin = Role.find_or_create_by_name('admin')
     user.roles << admin
@@ -19,12 +19,9 @@ describe Ability do
   end
 
   context "when user has signed in with a member role" do
-    #before(:all) do
-      #@user = create :user
-      #member = Role.find_or_create_by_name('member')
-      #@user.roles << member
-    #end
-    subject { Ability.new(create :user) }
+    # the role of deault user is member
+    let(:member) { create :user }
+    subject { Ability.new(member) }
 
     it { should be_able_to(:read, :all) }
     it { should be_able_to(:create, Question) }
@@ -35,6 +32,13 @@ describe Ability do
       it { should_not be_able_to(:update, Answer.new)}
       it { should_not be_able_to(:destroy, Question.new)}
       it { should_not be_able_to(:destroy, Answer.new)}
+    end
+
+    context "can update and destroy things belongs to him" do
+      it { should be_able_to(:update, member.questions.new)}
+      it { should be_able_to(:update, member.answers.new)}
+      it { should be_able_to(:destroy, member.questions.new)}
+      it { should be_able_to(:destroy, member.answers.new)}
     end
   end
 end
