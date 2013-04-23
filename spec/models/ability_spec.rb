@@ -9,9 +9,9 @@ describe Ability do
     it { should_not be_able_to(:create, Answer) }
   end
 
-  it "can manage Book when user has a admin role" do
+  it "when user has a admin role" do
     user = create :user
-    admin = Role.create(name: 'admin')
+    admin = Role.find_or_create_by_name('admin')
     user.roles << admin
 
     ability = Ability.new(user)
@@ -19,12 +19,12 @@ describe Ability do
   end
 
   context "when user has signed in with a member role" do
-    before(:all) do
-      @user = create :user
-      member = Role.create(name: 'member')
-      @user.roles << member
-    end
-    subject { Ability.new(@user) }
+    #before(:all) do
+      #@user = create :user
+      #member = Role.find_or_create_by_name('member')
+      #@user.roles << member
+    #end
+    subject { Ability.new(create :user) }
 
     it { should be_able_to(:read, :all) }
     it { should be_able_to(:create, Question) }
