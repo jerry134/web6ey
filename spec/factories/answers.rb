@@ -5,5 +5,6 @@ FactoryGirl.define do
     content "MyText"
     question_id 1
     accept false
+    user_id 1
   end
 end

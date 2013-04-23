@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create, :evaluate]
-  load_and_authorize_resource only: [:update, :edit, :destroy]
+  #load_and_authorize_resource only: [:update, :edit, :destroy]
+  load_and_authorize_resource
 
   # GET /questions
   # GET /questions.json
