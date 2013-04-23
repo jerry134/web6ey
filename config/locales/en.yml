@@ -4,3 +4,4 @@
 en:
   hello: "Hello world"
   owner_name: "Owner Name"
+  counter_of_questions: "Currently We have %{number} questions"
