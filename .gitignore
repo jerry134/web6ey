@@ -43,6 +43,7 @@ _yardoc
 /config/database.yml
 # Ignore other unneeded files.
 doc/
+tags
 *.swp
 *~
 .project
