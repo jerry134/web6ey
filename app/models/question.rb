@@ -15,7 +15,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :title, :content, :user
   attr_accessible :content, :title, :tag_list
   acts_as_taggable
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   has_many :answers
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
   scope :owner, joins(:user)

@@ -8,4 +8,10 @@ module ApplicationHelper
 			raw (link_to question.answers.last.owner_username)+"于#{(Time.now-question.answers.last.created_at.localtime).to_i/60}分钟前回复"
 		end
 	end
+  
+  def render_questions_counter
+    #FIXME need memcache
+    #@question ||= Question.all
+    I18n.t('counter_of_questions',  number: Question.count)
+  end
 end
