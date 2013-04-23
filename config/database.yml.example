@@ -9,7 +9,14 @@ development: &common
   host: 127.0.0.1
 
 test:
-  <<: *common
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: bey6_test
+  pool: 5
+  username: root
+  password: password
+  host: 127.0.0.1
 #production:
   #<<: *common
 production:
