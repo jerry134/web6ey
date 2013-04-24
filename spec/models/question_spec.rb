@@ -42,6 +42,18 @@ describe Question do
     question2.tag_list = "a,b"
     expect(question2).to be_valid
   end
+  
+  context "no answer question" do
+    #FIXME should be a factory girl relation
+    it "list all no answer questions" do
+      user1 = create :user
+      question1 = create :question
+      question1.answers.create(content: 'ab', user: user1)
+      3.times{create :question}
+      expect(Question.no_answer.count).to eql 3 
+      expect(Question.no_answer).to eql Question.all[1..4] 
+    end
+  end
 
   context "fails validation" do
     it "with a blank title" do

@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :question do
-    title "question"
+    sequence(:title) {|n| "question#{n}"}
     content "mycontext"
     tag_list ""
     user
