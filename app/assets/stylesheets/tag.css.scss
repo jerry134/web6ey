@@ -1,10 +1,35 @@
-// Place all the styles related to the tag controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//// Place all the styles related to the tag controller here.
+//// They will automatically be included in application.css.
+//// You can use Sass (SCSS) here: http://sass-lang.com/
+//#tag_cloud {
+  //width: 400px;
+  //line-height: 1.6em;
+  //.s {font-size: 0.8em;}
+  //.m {font-size: 1.2em;}
+  //.l {font-size: 1.8em;}
+//}
+
 #tag_cloud {
-  width: 400px;
-  line-height: 1.6em;
-  .s {font-size: 0.8em;}
-  .m {font-size: 1.2em;}
-  .l {font-size: 1.8em;}
+  width: auto;
+  line-height: 2.0em;
+
+  > a {
+    padding: 5px;
+  }
+  a.s {
+    font-size: 0.8em;
+    color: rgb(208, 222, 211);
+  }
+  a.m {
+    font-size: 1.2em;
+    color: rgb(215, 190, 188);
+  }
+  a.l {
+    font-size: 1.8em;
+    color: rgb(232, 111, 129);
+  }
+  a.h {
+    font-size: 2.2em;
+    color: rgb(245, 47, 82);
+  }
 }
