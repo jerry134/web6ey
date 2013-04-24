@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TagController do
+describe TagsController do
 
   describe "GET 'index'" do
     it "returns http success" do
