@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create, :evaluate]
   #load_and_authorize_resource only: [:update, :edit, :destroy]
   load_and_authorize_resource
+  skip_authorize_resource :only => :evaluate
 
   # GET /questions
   # GET /questions.json
@@ -68,12 +69,13 @@ class QuestionsController < ApplicationController
   end
 
   def evaluate
-    if QuestionEvaluation.where(user_id: current_user.id ,question_id: params[:question_id]).size == 0
-     QuestionEvaluation.create(user_id: current_user.id,question_id: params[:question_id],score: params[:score])
-      flash[:success] = I18n.t("flash.questions.evaluate.notice")
+    @question = QuestionEvaluation.find_by_user_id_and_question_id(current_user.id , params[:question_id])
+    if @question.nil?
+      QuestionEvaluation.create(user_id: current_user.id,question_id: params[:question_id],score: params[:score])
     else
-      flash[:error] = I18n.t("flash.questions.evaluate.alert")
+      @question.update_attributes(score: params[:score])
     end
+    flash[:success] = I18n.t("flash.questions.evaluate.notice")
     redirect_to "/questions/"+params[:question_id]
   end
 end

@@ -36,4 +36,8 @@ class Question < ActiveRecord::Base
       update_counters question.id, viewed_count: 1
     end
   end
+
+  def vote_count score
+    QuestionEvaluation.where(score: score ,question_id: id).size
+  end
 end
