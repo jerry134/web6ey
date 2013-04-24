@@ -3,7 +3,6 @@ language: ruby
 rvm:
   - 1.9.3
 env:
-  - DB=sqlite
   - DB=mysql
   - DB=postgresql
 script:
