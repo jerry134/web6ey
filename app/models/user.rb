@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string(255)
+#  image                  :string(255)
+#  questions_count        :integer          default(0)
 #
 
 class User < ActiveRecord::Base
