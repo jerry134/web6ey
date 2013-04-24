@@ -20,7 +20,17 @@ class Question < ActiveRecord::Base
   has_many :answers
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
   scope :owner, joins(:user)
+  scope :without_answer, joins(:answers).
+     select('questions.id').
+     group('questions.id').
+     having('count(answers.id) = 0')
+
   validate :validation_of_tag_list
+
+  def self.no_answer
+    Question.all.select{|question|question.answers.count == 0}
+  end
+
   def validation_of_tag_list
     if self.user.has_role?(:member) && !self.user.has_role?(:admin)
       unless (self.tag_list - Question.tag_counts.map(&:name)).blank?
