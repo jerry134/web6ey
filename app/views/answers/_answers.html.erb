@@ -1,4 +1,12 @@
 <% @answers.each do |answer| %>
-  <%= simple_format answer.content%>
-  <%= simple_format answer.user.username%>
+
+  <div class="row">
+    <div class="span9"><%= simple_format answer.content%></div>
+  </div>
+
+  <div class="row">
+    <div class="span1 offset8"><%= simple_format answer.user.username%></div>
+  </div>
+
+  <hr>
 <% end %>

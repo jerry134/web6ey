@@ -1,18 +1,25 @@
-<%- model_class = Question -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<div class="row">
+  <div class="span9"><h2><%= @question.title %></h2></div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @question.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @question.content %></dd>
-</dl>
+<div class="row">
+  <div class="span9 pull-right" style="margin-top=10px;margin-bottom:10px;"><%= render_status @question%></div>
+</div>
+
+
+<div class="row">
+  <div class="span1">
+      <%= button_to 'good',evaluate_questions_path(question_id: @question.id , score: 1), {class: 'btn btn-small'}%>
+      <%= button_to 'bad',evaluate_questions_path(question_id: @question.id , score: 0), {class: 'btn btn-small'}%>
+  </div>
+
+  <div class="span8">
+      <%= @question.content %>
+  </div>
+</div>
+
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              questions_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_question_path(@question), :class => 'btn' if can? :update, @question %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -21,9 +28,6 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' if can? :destroy, @question %>
 </div>
-
-<%= button_to 'good',evaluate_questions_path(question_id: @question.id , score: 1)%>
-<%= button_to 'bad',evaluate_questions_path(question_id: @question.id , score: 0)%>
 
 <%= render "answers/answers"%>
 <%= render "answers/form"%>

@@ -10,11 +10,14 @@
     </div>
   <% end %>
 
+  <div class="row">
+    <div class="span8"><h5><%= t 'your_answer'%></h5></div>
+  </div>
   <div class="field">
-    <%= f.text_area :content, rows: 8 %>
+    <%= f.text_area :content, {rows: 15, class: 'span6'} %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn  btn-primary'%>
   </div>
 <% end %>
 

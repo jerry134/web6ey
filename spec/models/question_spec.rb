@@ -51,7 +51,7 @@ describe Question do
       question1.answers.create(content: 'ab', user: user1)
       3.times{create :question}
       expect(Question.no_answer.count).to eql 3 
-      expect(Question.no_answer).to eql Question.all[1..4] 
+      expect(Question.no_answer).to eq Question.all[1..4] 
     end
   end
 

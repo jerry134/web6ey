@@ -1,5 +1,10 @@
 <div id='tag_cloud'>
-<% tag_cloud @tags, %w[s m l h] do |tag, css_class|%>
-  <%= link_to tag.name, tag_path(tag.name), class: css_class%>
-<% end %>
+
+  <% @tags.each do |tag|%>
+    <span class="post-tag">
+      <%= link_to tag.name, tag_path(tag.name)%>
+    </span>
+  <% end %>
+
+
 </div>

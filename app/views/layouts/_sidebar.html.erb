@@ -1,11 +1,23 @@
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to t('question_new', :default => t("helpers.links.new")),
             new_question_path,
             :class => 'btn btn-primary' if can? :create, Question %>
-<br/>
-<p>
-<%= render_questions_counter%>
-</p>
-<h2>About Us</h2>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+<hr>
+<h4><%= render_questions_counter%></h4>
+
+<hr>
+
+<h3><%=t 'tag_names_list'%></h3>
+<div id='tag_cloud' class="row">
+
+  <% render_all_tags.each.each do |tag|%>
+    <span class="span3">
+      <span class="post-tag">
+        <%= link_to tag.name, tag_path(tag.name)%>
+      </span>
+    </span>
+  <% end %>
+
+
+</div>
+
+

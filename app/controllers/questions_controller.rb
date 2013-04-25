@@ -1,6 +1,6 @@
+require 'will_paginate/array'
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create, :evaluate]
-  #load_and_authorize_resource only: [:update, :edit, :destroy]
   load_and_authorize_resource
   skip_authorize_resource :only => :evaluate
 
@@ -77,5 +77,14 @@ class QuestionsController < ApplicationController
     end
     flash[:success] = I18n.t("flash.questions.evaluate.notice")
     redirect_to "/questions/"+params[:question_id]
+  end
+
+  def no_answer
+    #@questions = Question.no_answer.paginate(page: params[:page], per_page: 5)
+    if params[:tag]
+      @questions = Question.no_answer.tagged_with(params[:tag]).page(params[:page]).per_page(5)
+    else
+      @questions = Question.no_answer.order("title").page(params[:page]).per_page(5)
+    end
   end
 end
