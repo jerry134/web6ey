@@ -1,5 +1,23 @@
 <%= link_to t('question_new', :default => t("helpers.links.new")),
             new_question_path,
             :class => 'btn btn-primary' if can? :create, Question %>
-
+<hr>
 <h4><%= render_questions_counter%></h4>
+
+<hr>
+
+<h3><%=t 'tag_names_list'%></h3>
+<div id='tag_cloud' class="row">
+
+  <% render_all_tags.each.each do |tag|%>
+    <span class="span3">
+      <span class="post-tag">
+        <%= link_to tag.name, tag_path(tag.name)%>
+      </span>
+    </span>
+  <% end %>
+
+
+</div>
+
+

@@ -25,4 +25,8 @@ module ApplicationHelper
     #@question ||= Question.all
     I18n.t('counter_of_questions',  number: Question.count)
   end
+
+  def render_all_tags 
+    @tags = Question.tag_counts
+  end
 end

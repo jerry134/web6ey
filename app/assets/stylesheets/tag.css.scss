@@ -2,23 +2,19 @@
   width: auto;
   line-height: 2.0em;
 
-  > a {
-    padding: 5px;
-  }
-  a.s {
-    font-size: 0.8em;
-    color: rgb(208, 222, 211);
-  }
-  a.m {
-    font-size: 1.2em;
-    color: rgb(215, 190, 188);
-  }
-  a.l {
-    font-size: 1.8em;
-    color: rgb(232, 111, 129);
-  }
-  a.h {
-    font-size: 2.2em;
-    color: rgb(245, 47, 82);
+  >span {}
+
+  span.post-tag {
+    text-decoration: none;
+    color: #6D8E99!important;
+    background-color: #E8F9FF;
+    border: 1px solid #C9DEE5;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    white-space: nowrap;
+    overflow: visible;
+    margin: 2px 2px 6px 0;
+    padding: 0.1em 0.8em;
+    line-height: 1.4;
   }
 }
