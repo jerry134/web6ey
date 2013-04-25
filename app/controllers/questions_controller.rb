@@ -80,11 +80,11 @@ class QuestionsController < ApplicationController
   end
 
   def no_answer
-    @questions = Question.no_answer.paginate(page: params[:page], per_page: 5)
-    #if params[:tag]
-      #@questions = Question.no_answer.tagged_with(params[:tag]).page(params[:page]).per_page(5)
-    #else
-      #@questions = Question.no_answer.order("title").page(params[:page]).per_page(5)
-    #end
+    #@questions = Question.no_answer.paginate(page: params[:page], per_page: 5)
+    if params[:tag]
+      @questions = Question.no_answer.tagged_with(params[:tag]).page(params[:page]).per_page(5)
+    else
+      @questions = Question.no_answer.order("title").page(params[:page]).per_page(5)
+    end
   end
 end
