@@ -15,6 +15,7 @@ Web6bey::Application.routes.draw do
     resources :answers
     collection do
       post 'evaluate'
+      get 'no_answer'
     end
   end
 
