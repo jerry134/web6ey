@@ -3,6 +3,11 @@
 </div>
 
 <div class="row">
+  <div class="span9 pull-right" style="margin-top=10px;margin-bottom:10px;"><%= render_status @question%></div>
+</div>
+
+
+<div class="row">
   <div class="span1">
       <%= button_to 'good',evaluate_questions_path(question_id: @question.id , score: 1), {class: 'btn btn-small'}%>
       <%= button_to 'bad',evaluate_questions_path(question_id: @question.id , score: 0), {class: 'btn btn-small'}%>
