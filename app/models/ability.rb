@@ -16,6 +16,7 @@ class Ability
         answer.try(:user) == user || user.has_role?(:admin)
       end
     else
+      can :no_answer, Question
       can :read, :all
     end
   end
