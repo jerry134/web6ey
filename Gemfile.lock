@@ -49,6 +49,10 @@ GEM
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    chosen-rails (0.9.13)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -225,6 +229,7 @@ DEPENDENCIES
   bootstrap-will_paginate
   cancan
   carrierwave
+  chosen-rails
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
