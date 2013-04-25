@@ -12,7 +12,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def default_url
-    "/images/" + [version_name, "default.png"].compact.join('_')
+    'user_image.jpg' 
   end
 
   # storage :fog
