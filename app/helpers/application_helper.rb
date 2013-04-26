@@ -10,11 +10,11 @@ module ApplicationHelper
     end
   end
 
-  def format_tags(tags)
+  def format_tags(tags, answer = '')
     html = ''
     tags.each do |tag|
       html += content_tag :span, class: 'post-tag' do
-        link_to(tag, tag_path(tag))
+        link_to(tag, tag_path(tag, :no_answer => answer))
       end
     end
     html.html_safe
@@ -26,7 +26,7 @@ module ApplicationHelper
     I18n.t('counter_of_questions',  number: Question.count)
   end
 
-  def render_all_tags 
+  def render_all_tags
     @tags = Question.tag_counts
   end
 end
