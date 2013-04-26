@@ -24,8 +24,8 @@ class Question < ActiveRecord::Base
      select('questions.id').
      group('questions.id').
      having('count(answers.id) = 0')
-  
   default_scope where(Question.arel_table[:content].not_eq(nil))
+
   scope :without_any_answer, where(Question.arel_table[:answers_count].eq(0)) 
   scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
   
