@@ -11,10 +11,10 @@ class Ability
       can :evaluate, Question
       can :create, [Question, Answer]
       can [:update, :destroy], Question do |question|
-        question.try(:user) == user || user.has_role?(:admin)
+        question.try(:user) == user 
       end
       can [:update, :destroy], Answer do |answer|
-        answer.try(:user) == user || user.has_role?(:admin)
+        answer.try(:user) == user 
       end
     else
       can :no_answer, Question

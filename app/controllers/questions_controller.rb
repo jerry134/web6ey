@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource
 
   # GET /questions
@@ -13,7 +12,6 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question = Question.find(params[:id])
     Question.viewed(@question, cookies)
     @answers = @question.answers
     @answer = Answer.new
@@ -70,6 +68,6 @@ class QuestionsController < ApplicationController
       @question.update_attributes(score: params[:score])
     end
     flash[:success] = I18n.t("flash.questions.evaluate.notice")
-    redirect_to "/questions/"+params[:question_id]
+    redirect_to question_path(params[:question_id])
   end
 end
