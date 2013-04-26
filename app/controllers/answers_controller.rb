@@ -20,6 +20,16 @@ class AnswersController < ApplicationController
     end
   end
 
+  def accept
+    @answer = Answer.find(params[:answer_id])
+    @answer.accept = true
+    if @answer.save
+      flash[:false] = "accept false"
+    else
+      flash[:success] = "accept success"
+    end
+    redirect_to "/questions/" + params[:question_id]
+  end
   private
   def load_question
     @question = Question.find(params[:question_id])

@@ -1,6 +1,11 @@
 Web6bey::Application.routes.draw do
   #get "answers/index"
 
+  resources :answers do
+    collection do
+      post 'accept' 
+    end
+  end
   get "answers/new"
 
   get 'tags/:tag', to: 'questions#index', as: :tag
