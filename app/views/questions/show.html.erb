@@ -29,5 +29,7 @@
               :class => 'btn btn-danger' if can? :destroy, @question %>
 </div>
 
-<%= render "answers/answers"%>
-<%= render "answers/form"%>
+<%= render "answers/answers", :question => @question%>
+<% if can? :create, Answer -%>
+  <%= render "answers/form" %>
+<% end -%>
