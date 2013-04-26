@@ -1,10 +1,7 @@
 <div id='tag_cloud'>
-
   <% @tags.each do |tag|%>
     <span class="post-tag">
       <%= link_to tag.name, tag_path(tag.name)%>
     </span>
   <% end %>
-
-
 </div>

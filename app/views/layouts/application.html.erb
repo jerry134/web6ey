@@ -24,7 +24,7 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li><%= link_to "问题", questions_path %></li>
-            <li><%= link_to "待解决问题", no_answer_questions_path %></li>
+            <li><%= link_to "待解决问题", questions_path(:no_answer => true) %></li>
             <li><%= link_to "联系我们" %></li>
             <li><%= link_to "标签",  tags_path%></li>
           </ul>
