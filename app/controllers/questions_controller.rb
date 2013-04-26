@@ -1,8 +1,4 @@
 class QuestionsController < ApplicationController
-<<<<<<< HEAD
-=======
-  before_filter :authenticate_user!, except: [:show, :index]
->>>>>>> upstream/master
   load_and_authorize_resource
 
   # GET /questions

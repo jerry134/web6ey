@@ -19,7 +19,6 @@ class Question < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   has_many :answers
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
-<<<<<<< HEAD
   scope :owner, joins(:user)
   scope :without_answer, joins(:answers).
      select('questions.id').
@@ -31,8 +30,6 @@ class Question < ActiveRecord::Base
   scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
   
   validate :validation_of_tag_list
-=======
->>>>>>> upstream/master
 
   default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
