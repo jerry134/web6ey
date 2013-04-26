@@ -24,18 +24,20 @@ class Question < ActiveRecord::Base
      select('questions.id').
      group('questions.id').
      having('count(answers.id) = 0')
-  
-  default_scope where(Question.arel_table[:content].not_eq(nil))
-  scope :without_any_answer, where(Question.arel_table[:answers_count].eq(0)) 
-  scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
-  
+
+  #default_scope where(Question.arel_table[:content].not_eq(nil))
+  default_scope where("content is not null").order("title")
+  scope :with_no_answer, where(:answers_count => 0)
+  #scope :without_any_answer, where(Question.arel_table[:answers_count].eq(0)) 
+  #scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
+
   validate :validation_of_tag_list
 
-  def self.no_answer
-    #includes(:answers).select { |question| question.answers.count == 0}
-    #Question.all.select{|question|question.answers.count == 0}
-    where(Question.arel_table[:answers_count].eq(0))
-  end
+  #def self.no_answer
+    ##includes(:answers).select { |question| question.answers.count == 0}
+    ##Question.all.select{|question|question.answers.count == 0}
+    #where(Question.arel_table[:answers_count].eq(0))
+  #end
 
   def validation_of_tag_list
     if self.user.has_role?(:member) && !self.user.has_role?(:admin)

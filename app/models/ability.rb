@@ -8,6 +8,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :member
       can :read, :all
+      can :evaluate, Question
       can :create, [Question, Answer]
       can [:update, :destroy], Question do |question|
         question.try(:user) == user || user.has_role?(:admin)

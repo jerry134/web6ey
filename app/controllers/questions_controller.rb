@@ -1,17 +1,13 @@
-require 'will_paginate/array'
 class QuestionsController < ApplicationController
-  before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new, :create, :evaluate]
+  before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource
-  skip_authorize_resource :only => :evaluate
 
   # GET /questions
   # GET /questions.json
   def index
-    if params[:tag]
-      @questions = Question.tagged_with(params[:tag]).page(params[:page]).per_page(5)
-    else
-      @questions = Question.order("title").page(params[:page]).per_page(5)
-    end
+    @questions = params[:no_answer].blank? ? Question : Question.with_no_answer
+    @questions = @questions.tagged_with(params[:tag]) if params[:tag]
+    @questions = @questions.page(params[:page]).per_page(5)
   end
 
   # GET /questions/1
@@ -28,8 +24,6 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
   end
-
-  # GET /questions/1/edit
 
   # POST /questions
   # POST /questions.json
@@ -77,14 +71,5 @@ class QuestionsController < ApplicationController
     end
     flash[:success] = I18n.t("flash.questions.evaluate.notice")
     redirect_to "/questions/"+params[:question_id]
-  end
-
-  def no_answer
-    #@questions = Question.no_answer.paginate(page: params[:page], per_page: 5)
-    if params[:tag]
-      @questions = Question.no_answer.tagged_with(params[:tag]).page(params[:page]).per_page(5)
-    else
-      @questions = Question.no_answer.order("title").page(params[:page]).per_page(5)
-    end
   end
 end
