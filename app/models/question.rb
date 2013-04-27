@@ -19,6 +19,17 @@ class Question < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   has_many :answers
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
+  scope :owner, joins(:user)
+  scope :without_answer, joins(:answers).
+     select('questions.id').
+     group('questions.id').
+     having('count(answers.id) = 0')
+  default_scope where(Question.arel_table[:content].not_eq(nil))
+
+  scope :without_any_answer, where(Question.arel_table[:answers_count].eq(0)) 
+  scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
+  
+  validate :validation_of_tag_list
 
   default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)

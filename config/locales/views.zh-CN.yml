@@ -18,6 +18,7 @@ zh-CN:
         notice: "恭喜您,评价成功"
         alert: "非常抱歉，一个问题您只能评价一次！"
     access_denied: "操作被拒绝，你可能没有权限或未登录。"
+    access_permit: "继续操作请先登录。"
 
   helpers:
     actions: "操作"
