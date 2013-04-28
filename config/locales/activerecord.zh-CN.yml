@@ -4,6 +4,7 @@ zh-CN:
       user: "用户"
       question: "问题"
       answer: "回答"
+      tag: "标签"
     attributes:
       user:
         login: "用户名"
@@ -20,3 +21,6 @@ zh-CN:
         content: "内容"
         tag_list: "标签"
         created_at: "提问时间"
+      tag:
+        name: "标签名"
+        describe: "描述"

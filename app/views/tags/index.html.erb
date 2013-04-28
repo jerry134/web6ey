@@ -1,7 +1,24 @@
-<div id='tag_cloud'>
-  <% @tags.each do |tag|%>
+<div id="all_tag">
+<% @tags.each do |tag| %>
+  <div id="tag_dsc">
+    <div id="tag_cloud">
     <span class="post-tag">
       <%= link_to tag.name, tag_path(tag.name)%>
     </span>
-  <% end %>
+    <span class="muted">&nbsp;× <%= Question.tagged_with(tag.name).count %></span>
+    <span id="edit_destroy">
+    <%= link_to t('helpers.links.edit'), edit_tag_path(tag) if can? :update, Tag%> 
+    <%= link_to t('helpers.links.destroy'), "tags/#{tag.id}", method: :delete, 
+                  data: {confirm: t("helpers.links.confirm")} if can? :destroy, Tag %>
+    </span>
+    </div>
+    <div id="dsc" class="muted">
+      <%= wrap tag.describe %>
+    </div>
+    <small>
+      <%= tag_count_of_time(tag, 'month') %> 
+      <%= tag_count_of_time(tag, 'year') %> 
+    </small>
+  </div>
+<% end %>
 </div>
