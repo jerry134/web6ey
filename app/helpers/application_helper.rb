@@ -27,6 +27,6 @@ module ApplicationHelper
   end
 
   def render_all_tags
-    @tags = Question.tag_counts
+    @tags = Tag.all
   end
 end
