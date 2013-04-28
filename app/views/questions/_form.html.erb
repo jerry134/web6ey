@@ -1,10 +1,6 @@
 <%= simple_form_for @question, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :title, input_html: { class: 'span6' }%>
-  <% if current_user.has_role? :admin -%>
-    <%= f.input :tag_list, input_html: { class: 'span6' } %>
-  <% elsif current_user.has_role? :member %>
-    <%= f.input :tag_list, collection: Question.tag_counts.map(&:name), input_html: {class: 'tag_list span6', multiple: true} %>
-  <% end -%>
+  <%= f.input :tag_list, collection: Tag.all.map(&:name), input_html: {class: 'tag_list span6', multiple: true} %>
   <%= f.input :content, input_html: {rows: 15, class: 'span6'} %>
   <%-# @question.owner_username %>
   <div class="form-actions">

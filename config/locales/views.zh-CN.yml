@@ -34,3 +34,7 @@ zh-CN:
       detail: "详情"
       all: "所有"
       more: "更多..."
+    titles:
+      tag: "新标签"
+      question: "新问题"
+      
