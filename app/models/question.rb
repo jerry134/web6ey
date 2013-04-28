@@ -29,21 +29,21 @@ class Question < ActiveRecord::Base
   scope :without_any_answer, where(Question.arel_table[:answers_count].eq(0)) 
   scope :with_no_answer, -> {includes(:answers).select{ |q|q.answers.count == 0}}
   
-  validate :validation_of_tag_list
+  #validate :validation_of_tag_list
 
   default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
 
-  validate :validation_of_tag_list
+  #validate :validation_of_tag_list
 
-  def validation_of_tag_list
-    if self.user.has_role?(:member) && !self.user.has_role?(:admin)
-      unless (self.tag_list - Question.tag_counts.map(&:name)).blank?
-        errors[:tag_list] << I18n.t("flash.tag.create.alert")
-      end
-    end
-  end
-  private :validation_of_tag_list
+  #def validation_of_tag_list
+   # if self.user.has_role?(:member) && !self.user.has_role?(:admin)
+    #  unless (self.tag_list - Question.tag_counts.map(&:name)).blank?
+     #   errors[:tag_list] << I18n.t("flash.tag.create.alert")
+     # end
+    #end
+  #end
+  #private :validation_of_tag_list
 
   def self.viewed(question, cookies)
     unless cookies[question.id]
