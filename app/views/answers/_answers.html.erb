@@ -5,7 +5,12 @@
   </div>
 
   <div class="row">
-    <div class="span1 offset8"><%= simple_format answer.user.username%></div>
+    <% if answer.accept%>
+      <div class="span2"><%= t "accept_answer"%></div>
+      <div class="span2 offset6"><%= simple_format answer.user.username%></div>
+    <% else %>
+      <div class="span1 offset8"><%= simple_format answer.user.username%></div>
+    <% end %>
   </div>
 
   <% unless exist_any_accept_answer? @answers%>

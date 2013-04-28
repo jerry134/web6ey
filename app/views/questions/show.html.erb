@@ -30,6 +30,8 @@
 </div>
 
 <%= render "answers/answers", :question => @question%>
-<% if can? :create, Answer -%>
-  <%= render "answers/form" %>
-<% end -%>
+<% unless exist_any_accept_answer? @question.answers%>
+  <% if can? :create, Answer -%>
+    <%= render "answers/form" %>
+  <% end -%>
+<% end %>
