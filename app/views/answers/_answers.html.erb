@@ -6,7 +6,7 @@
 
   <div class="row">
     <% if answer.accept%>
-      <div class="span2"><%= t "accept_answer"%></div>
+      <div class="span2" style="color:red;"><%= t "accept_answer"%></div>
       <div class="span2 offset6"><%= simple_format answer.user.username%></div>
     <% else %>
       <div class="span1 offset8"><%= simple_format answer.user.username%></div>
