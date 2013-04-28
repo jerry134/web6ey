@@ -8,7 +8,7 @@
     <div class="span1 offset8"><%= simple_format answer.user.username%></div>
   </div>
 
-  <% if !exist_accept_answer @answers%>
+  <% unless exist_any_accept_answer? @answers%>
     <%= button_to 'accept',accept_answers_path(answer_id: answer.id, question_id: question.id), {class: 'btn btn-small'}%>
   <% end %>
   <hr>
