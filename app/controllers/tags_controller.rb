@@ -6,20 +6,13 @@ class TagsController < ApplicationController
     @tags = Tag.all
   end
 
-  def new
-    @tag = Tag.new
-  end
-
-  def create
-    @tag = Tag.new(params[:tag])
-    if @tag.save
-      redirect_to tags_path, notice: I18n.t("flash.actions.create.notice")
-    else
-      render :new
-    end
+  def edit
+    @tag = Tag.find(params[:id])
   end
 
   def update
+    @tag = Tag.find(params[:id])
+
     if @tag.update_attributes(params[:tag])
       redirect_to tags_path, notice: I18n.t("flash.actions.update.notice")
     else
@@ -27,8 +20,8 @@ class TagsController < ApplicationController
     end
   end
 
-  def destroy
-    @tag.destroy
-    redirect_to tags_path, notice: I18n.t("flash.actions.destory.notice")
-  end
+  #def destroy
+    #@tag.destroy
+    #redirect_to tags_path, notice: I18n.t("flash.actions.destory.notice")
+  #end
 end

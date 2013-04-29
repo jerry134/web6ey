@@ -1,9 +1,6 @@
 <%= link_to t('question_new', :default => t("helpers.links.new")),
             new_question_path,
             :class => 'btn btn-primary' if can? :create, Question %>
-<%= link_to t('tag_new', default: t("helpers.links.new")), 
-              new_tag_path,
-              class: 'btn' if can? :create, Tag %>
 <hr>
 <h4><%= render_questions_counter%></h4>
 
