@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  id       :integer          not null, primary key
+#  name     :string(255)
+#  describe :text
+#
+
 class Tag < ActiveRecord::Base
   attr_accessible :name, :describe
   has_many :taggings, :dependent => :destroy, :class_name => 'ActsAsTaggableOn::Tagging'
