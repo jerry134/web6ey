@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource
   skip_authorization_check only: :index
+
   def index
     @tags = Tag.all
   end
@@ -16,11 +17,11 @@ class TagsController < ApplicationController
     else
       render :new
     end
-  end  
+  end
 
   def update
     if @tag.update_attributes(params[:tag])
-      redirect_to tags_path, notice: I18n.t("flash.actions.update.notice") 
+      redirect_to tags_path, notice: I18n.t("flash.actions.update.notice")
     else
       render :edit
     end

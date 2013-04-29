@@ -3,7 +3,7 @@ Web6bey::Application.routes.draw do
 
   resources :answers do
     collection do
-      post 'accept' 
+      post 'accept'
     end
   end
   get "answers/new"

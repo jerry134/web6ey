@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
 
   def validates_name_uniqueness?
     true
-  end  
+  end
 
   def self.named(name)
     if ActsAsTaggableOn.strict_case_match
@@ -17,65 +17,65 @@ class Tag < ActiveRecord::Base
     end
   end
 
-    def self.named_any(list)
-      if ActsAsTaggableOn.strict_case_match
-        where(list.map { |tag| sanitize_sql(["name = #{binary}?", tag.to_s.mb_chars]) }.join(" OR "))
-      else
-        where(list.map { |tag| sanitize_sql(["lower(name) = ?", tag.to_s.mb_chars.downcase]) }.join(" OR "))
-      end
+  def self.named_any(list)
+    if ActsAsTaggableOn.strict_case_match
+      where(list.map { |tag| sanitize_sql(["name = #{binary}?", tag.to_s.mb_chars]) }.join(" OR "))
+    else
+      where(list.map { |tag| sanitize_sql(["lower(name) = ?", tag.to_s.mb_chars.downcase]) }.join(" OR "))
     end
-    
-    def self.named_like(name)
-      where(["name #{like_operator} ? ESCAPE '!'", "%#{escape_like(name)}%"])
+  end
+
+  def self.named_like(name)
+    where(["name #{like_operator} ? ESCAPE '!'", "%#{escape_like(name)}%"])
+  end
+
+  def self.named_like_any(list)
+    where(list.map { |tag| sanitize_sql(["name #{like_operator} ? ESCAPE '!'", "%#{escape_like(tag.to_s)}%"]) }.join(" OR "))
+  end
+
+  def self.find_or_create_with_like_by_name(name)
+    if (ActsAsTaggableOn.strict_case_match)
+      self.find_or_create_all_with_like_by_name([name]).first
+    else
+      named_like(name).first || create(:name => name)
     end
-        
-    def self.named_like_any(list)
-      where(list.map { |tag| sanitize_sql(["name #{like_operator} ? ESCAPE '!'", "%#{escape_like(tag.to_s)}%"]) }.join(" OR "))
+  end
+  def self.find_or_create_all_with_like_by_name(*list)
+    list = [list].flatten
+
+    return [] if list.empty?
+
+    existing_tags = Tag.named_any(list)
+
+    list.map do |tag_name|
+      comparable_tag_name = comparable_name(tag_name)
+      existing_tag = existing_tags.find { |tag| comparable_name(tag.name) == comparable_tag_name }
+
+      existing_tag || Tag.create(:name => tag_name)
     end
-            
-    def self.find_or_create_with_like_by_name(name)
-      if (ActsAsTaggableOn.strict_case_match)
-        self.find_or_create_all_with_like_by_name([name]).first
-      else
-        named_like(name).first || create(:name => name)
-      end
-    end
-    def self.find_or_create_all_with_like_by_name(*list)
-      list = [list].flatten
+  end
 
-      return [] if list.empty?
+  def ==(object)
+    super || (object.is_a?(Tag) && name == object.name)
+  end
 
-      existing_tags = Tag.named_any(list)
+  def to_s
+    name
+  end
 
-      list.map do |tag_name|
-        comparable_tag_name = comparable_name(tag_name)
-        existing_tag = existing_tags.find { |tag| comparable_name(tag.name) == comparable_tag_name }
+  def count
+    read_attribute(:count).to_i
+  end
 
-        existing_tag || Tag.create(:name => tag_name)
-      end
-    end
+  class << self
+    private
 
-        def ==(object)
-      super || (object.is_a?(Tag) && name == object.name)
-    end
-
-    def to_s
-      name
-    end
-
-    def count
-      read_attribute(:count).to_i
+    def comparable_name(str)
+      str.mb_chars.downcase.to_s
     end
 
-    class << self
-      private
-
-      def comparable_name(str)
-        str.mb_chars.downcase.to_s
-      end
-
-      def binary
-        /mysql/ === ActiveRecord::Base.connection_config[:adapter] ? "BINARY " : nil
-      end
+    def binary
+      /mysql/ === ActiveRecord::Base.connection_config[:adapter] ? "BINARY " : nil
     end
+  end
 end
