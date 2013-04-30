@@ -7,3 +7,4 @@ en:
   counter_of_questions: "Currently We have %{number} questions"
   counter_of_answers: "Currently We have %{number} answers"
   counter_of_rate: "Currently %{rate}% of the question has been answered"
+  counter_of_users: "Currently We have %{number} users" 
