@@ -1,24 +1,24 @@
-development: &common
+defaults: &defaults
   adapter: mysql2
+  host: 127.0.0.1
   encoding: utf8
   reconnect: false
-  database: bey6
   pool: 5
   username: root
   password: password
-  host: 127.0.0.1
+
+development:
+  <<: *defaults
+  database: bey6
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *defaults
   database: bey6_test
-  pool: 5
-  username: root
-  password: password
-  host: 127.0.0.1
+
 #production:
-  #<<: *common
+  #<<: *defaults
+  #database: bey6
+
 production:
   adapter: postgresql
   encoding: unicode

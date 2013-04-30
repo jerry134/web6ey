@@ -13,19 +13,19 @@
 #
 
 class Question < ActiveRecord::Base
+  attr_accessible :content, :title, :tag_list
 
   validates_presence_of :title, :content, :user
-  attr_accessible :content, :title, :tag_list
-  acts_as_taggable
-  belongs_to :user, :counter_cache => true
-  has_many :answers
-  delegate :username, to: :user, allow_nil: true, prefix: 'owner'
   validate :validation_of_tag_list
+
+  acts_as_taggable
+
+  has_many :answers
+  belongs_to :user, :counter_cache => true
+  delegate :username, to: :user, allow_nil: true, prefix: 'owner'
 
   default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
-
-  validate :validation_of_tag_list
 
   def validation_of_tag_list
     if self.user.has_role?(:member) && !self.user.has_role?(:admin)
