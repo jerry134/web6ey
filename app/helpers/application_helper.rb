@@ -1,7 +1,7 @@
 #encoding:utf-8
 module ApplicationHelper
 
-  def render_status question
+  def render_status_answer question
     if question.answers.blank?
       raw (link_to question.owner_username)+"于#{time_ago_in_words question.created_at}前发布"
 
@@ -20,7 +20,7 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def render_questions_counter
+  def render_status_counter
     #FIXME need memcache
     #@question ||= Question.all
     content_tag :div do 
