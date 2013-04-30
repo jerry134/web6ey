@@ -4,6 +4,7 @@ zh-CN:
   counter_of_questions: "社区目前有%{number}个问题"
   counter_of_answers: "社区目前有%{number}个回答"
   counter_of_rate: "社区目前问题回答率为%{rate}%"
+  counter_of_users: "社区目前有%{number}个注册用户"
   question_new : "我要提问"
   tag_new: "新标签"
   tag_names_list : "标签云"
