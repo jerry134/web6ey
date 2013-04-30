@@ -33,3 +33,16 @@
     <%= render "answers/form" %>
   <% end -%>
 <% end %>
+
+<script type="text/javascript">
+  function ajaxdeplay(){
+    $.ajax({
+      url: 'viewed',
+      type: 'post',
+      data: 'question=<%= @question.id %>'
+    });
+  }
+  
+  //延迟10秒
+  setTimeout('ajaxdeplay()',10000);
+</script>
