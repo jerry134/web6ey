@@ -17,7 +17,7 @@ module TagsHelper
       ", 本年有#{a}人提问" if a != 0
     end
   end
-  
+
   private
   def wrap_long_string(text, max_width = 40)
     zero_width_space = "&#8203"

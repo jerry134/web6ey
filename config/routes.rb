@@ -1,16 +1,16 @@
 Web6bey::Application.routes.draw do
-  #get "answers/index"
-
   resources :answers do
     collection do
-      post 'accept' 
+      post 'accept'
     end
   end
   get "answers/new"
 
-  get 'tag/:tag', to: 'questions#index', as: :tag
+  get 'tags/:tag', to: 'questions#index', as: :tag
 
-  resources :tags
+  get 'tags', :controller => "tags", :action => 'index'
+  get 'tags/:id/edit', :controller => "tags", :action => 'edit', as: :edit_tag
+  put 'tags/:id', :controller => "tags", :action => 'update'
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
