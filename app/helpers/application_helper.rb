@@ -23,7 +23,11 @@ module ApplicationHelper
   def render_questions_counter
     #FIXME need memcache
     #@question ||= Question.all
-    I18n.t('counter_of_questions',  number: Question.count)
+    content_tag :div do 
+    I18n.t('counter_of_questions',  number: Question.count) + " , " + 
+    I18n.t('counter_of_answers',  number: Answer.count) + " , " + 
+    I18n.t('counter_of_rate',  rate: sprintf("%5.2f", Question.count / Answer.count.to_f))
+    end
   end
 
   def render_all_tags
