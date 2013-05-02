@@ -8,7 +8,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :member
       can :read, :all
-      can :evaluate, Question
+      can [:evaluate, :viewed], Question
       can :create, [Question, Answer]
       can [:update, :destroy], Question do |question|
         question.try(:user) == user
@@ -17,7 +17,7 @@ class Ability
         answer.try(:user) == user
       end
     else
-      can :no_answer, Question
+      can :viewed, Question
       can :read, :all
     end
   end

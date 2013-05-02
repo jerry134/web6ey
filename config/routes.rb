@@ -4,7 +4,6 @@ Web6bey::Application.routes.draw do
       post 'accept'
     end
   end
-  get "answers/new"
 
   get 'tags/:tag', to: 'questions#index', as: :tag
 
@@ -18,9 +17,9 @@ Web6bey::Application.routes.draw do
     resources :answers
     collection do
       post 'evaluate'
+      post 'viewed'
     end
   end
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

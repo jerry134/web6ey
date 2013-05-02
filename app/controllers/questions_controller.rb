@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   load_and_authorize_resource
+  skip_authorization_check only: :viewed
 
   # GET /questions
   # GET /questions.json
@@ -12,7 +13,6 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    Question.viewed(@question, cookies)
     @answers = @question.answers
     @answer = Answer.new
   end
@@ -69,5 +69,10 @@ class QuestionsController < ApplicationController
     end
     flash[:success] = I18n.t("flash.questions.evaluate.notice")
     redirect_to question_path(params[:question_id])
+  end
+
+  def viewed
+    Question.update_counters params[:question], viewed_count: 1
+    render :nothing => true
   end
 end
