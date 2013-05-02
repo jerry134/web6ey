@@ -10,9 +10,7 @@ describe Ability do
   end
 
   it "when user signed in with a admin role" do
-    user = create :user
-    admin = Role.find_or_create_by_name('admin')
-    user.roles << admin
+    user = create :user, :admin
 
     ability = Ability.new(user)
     ability.should be_able_to(:manage, :all)
@@ -20,7 +18,7 @@ describe Ability do
 
   context "when user has signed in with a member role" do
     # the role of deault user is member
-    let(:member) { create :user }
+    let(:member) { create :user, :member }
     subject { Ability.new(member) }
 
     it { should be_able_to(:read, :all) }
