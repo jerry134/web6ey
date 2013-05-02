@@ -30,5 +30,14 @@ FactoryGirl.define do
     email
     password "passwordss"
     password_confirmation "passwordss"
+
+    trait :admin do
+      after(:build) {|u| u.roles << Role.find_by_name('admin') }
+    end
+
+    # default role
+    trait :member do
+      after(:build) {|u| u.roles << Role.find_by_name('member') }
+    end
   end
 end
