@@ -19,5 +19,9 @@ FactoryGirl.define do
     accept false
     question
     user
+
+    factory :invalid_answer do
+      content nil
+    end
   end
 end

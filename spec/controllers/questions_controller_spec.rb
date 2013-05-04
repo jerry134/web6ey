@@ -66,15 +66,54 @@ describe QuestionsController do
       response.should be_success
     end
 
-    it "#create should have create action" do
-      expect {
-        post 'create', :question => valid_attributes
-      }.to change{Question.count}.by(1)
+    context "create" do
+      it "#create should have create action" do
+        expect {
+          post 'create', :question => valid_attributes
+        }.to change{Question.count}.by(1)
+      end
+
+      context "with invalid attributes" do
+        let(:invalid_attributes) { attributes_for(:invalid_question) }
+
+        it "does not save the new question" do
+          expect{
+            post :create, question: invalid_attributes
+          }.to_not change(Question, :count)
+        end
+
+        it "re-renders the new method" do
+          post :create, question: invalid_attributes
+          response.should render_template :new
+        end
+      end
     end
 
     it "#edit should have edit action" do
       get :edit, :id => question.id
       response.should be_success
+    end
+
+    context "update" do
+      context 'with valid attributes' do
+        it 'update the question' do
+          put 'update', :id => question.id, :question => valid_attributes
+          response.should redirect_to(question)
+        end
+      end
+
+      context "with invalid attributes" do
+        let(:invalid_attributes) { attributes_for(:invalid_question) }
+        it "locates the requested question" do
+          put :update, id: question, question: invalid_attributes
+          assigns(:question).should eq(question)
+        end
+
+        it "re-renders the edit method" do
+          put :update, id: question, question: invalid_attributes
+          response.should render_template :edit
+        end
+      end
     end
 
     it "#destroy should have a destroy action" do
@@ -83,5 +122,13 @@ describe QuestionsController do
         delete :destroy, id: question.id
       }.to change{Question.count}.by(-1)
     end
+  end
+
+  it "viewed" do
+    #question = user.questions.create(title: "question_name", content: "this is question")
+    expect {
+      post :viewed, question: question.id
+      question.reload
+    }.to change{question.viewed_count}.by(1)
   end
 end

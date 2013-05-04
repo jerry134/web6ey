@@ -14,7 +14,7 @@
   </div>
 
   <% unless exist_any_accept_answer? @answers%>
-    <%= button_to 'accept',accept_answers_path(answer_id: answer.id, question_id: question.id), {class: 'btn btn-small'}%>
+    <%= button_to 'accept',accept_question_answers_path(answer_id: answer.id, question_id: question.id), {class: 'btn btn-small'}%>
   <% end %>
   <hr>
 <% end %>
