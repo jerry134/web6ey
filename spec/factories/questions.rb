@@ -18,5 +18,10 @@ FactoryGirl.define do
     content "mycontext"
     tag_list ""
     user
+
+    factory :invalid_question do
+      title nil
+      content nil
+    end
   end
 end
