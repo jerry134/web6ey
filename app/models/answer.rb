@@ -12,7 +12,7 @@
 #
 
 class Answer < ActiveRecord::Base
-  attr_accessible :accept, :content, :question_id, :user
+  attr_accessible :accept, :content, :question_id, :user_id
 
   belongs_to :question, counter_cache: true
   belongs_to :user
