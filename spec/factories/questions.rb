@@ -18,5 +18,10 @@ FactoryGirl.define do
     content { Forgery(:lorem_ipsum).words(10) }
     tag_list ''
     user
+
+    factory :invalid_question do
+      title nil
+      content nil
+    end
   end
 end

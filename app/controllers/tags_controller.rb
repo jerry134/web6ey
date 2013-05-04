@@ -19,9 +19,4 @@ class TagsController < ApplicationController
       render :edit
     end
   end
-
-  #def destroy
-    #@tag.destroy
-    #redirect_to tags_path, notice: I18n.t("flash.actions.destory.notice")
-  #end
 end

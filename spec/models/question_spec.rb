@@ -43,15 +43,15 @@ describe Question do
     question2.tag_list = "a,b"
     expect(question2).to be_valid
   end
-  
+
   context "no answer question" do
     #FIXME should be a factory girl relation
     it "list all no answer questions" do
       user1 = create :user
       question1 = create :question
-      question1.answers.create(content: 'ab', user: user1)
+      question1.answers.create(content: 'ab', user_id: user1.id)
       3.times{create :question}
-      expect(Question.with_no_answer.count).to eql 3 
+      expect(Question.with_no_answer.count).to eql 3
       expect(Question.with_no_answer).to eq Question.where(answers_count: 0)
     end
   end
