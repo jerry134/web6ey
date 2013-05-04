@@ -7,6 +7,7 @@ describe AnswersController do
 
   let(:user) { create :user }
   let(:valid_attributes) { attributes_for(:answer).merge(question_id: question.id, user_id: user.id) }
+  let(:invalid_attributes) { attributes_for(:invalid_answer) }
 
   describe "GET 'index'" do
     it "returns http success" do
@@ -41,6 +42,19 @@ describe AnswersController do
       expect {
         post :create, question_id: question.id, answer: valid_attributes
       }.to change(Answer, :count).by(1)
+    end
+
+    it "does not create with invalid attributes" do
+      sign_in user
+      expect {
+        post :create, question_id: question.id, answer: invalid_attributes
+      }.to_not change(Answer, :count)
+    end
+
+    it "re-renders the new method" do
+      sign_in user
+      post :create, question_id: question.id, answer: invalid_attributes
+      response.should render_template :new
     end
   end
 end
