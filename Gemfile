@@ -41,6 +41,7 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'forgery'
   gem 'rspec-rails', "~> 2.0"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
