@@ -71,6 +71,14 @@ describe TagsController do
       end
     end
 
+    context 'when member has signed in' do
+      it "should be redirect" do
+        sign_in user
+        put 'update', :id => tag.id, :tag => valid_attributes
+        response.should be_redirect
+      end
+    end
+
     context 'when user has not signed in' do
       it "should be redirect" do
         put 'update', :id => tag.id, :tag => valid_attributes
