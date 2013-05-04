@@ -5,7 +5,7 @@ describe QuestionsController do
 
   context "Not the creator of the question" do
     before(:each) do
-      user = FactoryGirl.create(:user)
+      user = create(:user)
       sign_in(:user, user)
     end
 
