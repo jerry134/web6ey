@@ -1,10 +1,4 @@
 Web6bey::Application.routes.draw do
-  resources :answers do
-    collection do
-      post 'accept'
-    end
-  end
-
   get 'tags/:tag', to: 'questions#index', as: :tag
 
   get 'tags', :controller => "tags", :action => 'index'
@@ -14,7 +8,9 @@ Web6bey::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
   resources :questions do
-    resources :answers
+    resources :answers do
+      post :accept, on: :collection
+    end
     collection do
       post 'evaluate'
       post 'viewed'
