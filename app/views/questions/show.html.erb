@@ -13,8 +13,9 @@
   </div>
 
   <div class="span8">
-      <%= @question.content %>
+    <%= @question.content %>
   </div>
+  <%= @question.closed %>
 </div>
 
 <div class="form-actions">
@@ -25,6 +26,7 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' if can? :destroy, @question %>
+  <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">关闭问题</a>
 </div>
 
 <%= render "answers/answers", :question => @question%>
@@ -33,6 +35,24 @@
     <%= render "answers/form" %>
   <% end -%>
 <% end %>
+
+<% if (!@question.closed) && (can? :closed, @question) -%>
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">关闭问题</h3>
+    </div>
+    <%= simple_form_for(@question, :method => 'post', :url => closed_question_path(@question)) do |f| %>
+      <div class="modal-body">
+        <%= f.input :close_reason, input_html: {rows: 10, class: 'span5'} %>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit '关闭提问', :class => 'btn btn-warning' %>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+      </div>
+    <% end %>
+  </div>
+<% end -%>
 
 <script type="text/javascript">
   function ajaxdeplay(){

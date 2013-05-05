@@ -15,6 +15,7 @@ Web6bey::Application.routes.draw do
       post 'evaluate'
       post 'viewed'
     end
+    post :closed, on: :member
   end
 
   # The priority is based upon order of creation:
