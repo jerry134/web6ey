@@ -1,0 +1,37 @@
+ <% messages = current_user.messages%>
+ <div id="main" class="container-fluid">
+  <div id="notifications" class="box">
+    <div class="tools">
+      <a href="/notifications/clear" class="btn btn-danger" data-disable-with="清空中..." data-method="post" rel="nofollow">清空</a>
+      <h3 class="pull-right">通知提醒 <small style="font-size:12px;margin-left:5px;">(<%=messages.count%> 条)</small></h3>
+  </div>
+  <table class="table messages">
+    <tbody>
+    <%messages.each do |message|%>
+    <%answer_user = message.answer.user%>
+    <tr id="notification-<%=message.id%>">
+     <td class="face">
+      <%=link_to image_tag(answer_user.image, height:'48px',width:'48px'),"users/#{answer_user.id}"%>
+     </td>
+     <td>
+        <h3>
+          <span class="user">
+            <%=link_to answer_user.username, "users/#{answer_user.id}"%>
+          </span>在
+          <%=link_to message.answer.question.title, question_path(message.answer.question)%>
+          提及你：
+        </h3>
+        <div class="md_body">
+            <%=simple_format message.answer.content%>
+         </div>
+     </td>
+
+    <td class="last">
+      <a data='<%=message.id%>' class="label message_delete" >删除</a>
+    </td>
+  </tr>
+<%end%>
+</tbody>
+</table>
+</div>
+</div>
