@@ -78,4 +78,27 @@ describe Question do
     question.user = user
     question.owner_username.should eq user.username
   end
+
+  context "question answer coverage " do
+    it "no answer for any question, the answer_coverage should 0" do
+      create :question
+      Question.answer_coverage.should == 0
+    end
+
+    it "one quetion had answered,one quetion had't answered, the the answer_coverage should 50" do
+      question1 = create :question
+      question2 = create :question
+      question1.answers_count = 1
+      question1.save
+      Question.answer_coverage.should == 50
+    end
+
+    it "all quetion had answered the the answer_coverage should 100" do
+      question1 = create :question
+      question1.answers_count = 1
+      question1.save
+      Question.answer_coverage.should == 100
+    end
+  end
+
 end

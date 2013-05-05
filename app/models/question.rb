@@ -39,4 +39,10 @@ class Question < ActiveRecord::Base
   def vote_count score
     QuestionEvaluation.where(score: score ,question_id: id).size
   end
+
+  class << self
+    def answer_coverage
+      (1-with_no_answer.count / count.to_f) * 100
+    end
+  end
 end
