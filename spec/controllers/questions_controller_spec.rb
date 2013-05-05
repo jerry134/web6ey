@@ -125,10 +125,30 @@ describe QuestionsController do
   end
 
   it "viewed" do
-    #question = user.questions.create(title: "question_name", content: "this is question")
     expect {
       post :viewed, question: question.id
       question.reload
     }.to change{question.viewed_count}.by(1)
+  end
+
+  context "closed question" do
+    let(:valid_attributes) { attributes_for(:question) }
+    let(:invalid_attributes) { attributes_for(:invalid_question) }
+
+    it "success" do
+      sign_in user
+      expect {
+        put :closed,  id: question, question: valid_attributes
+        question.reload
+      }.to change{question.closed}.from(false).to(true)
+    end
+
+    it "failed" do
+      sign_in user
+      put :closed,  id: question, question: invalid_attributes
+      question.reload
+      question.closed.should == false
+      flash[:alert].should eql(I18n.t('flash.actions.update.alert'))
+    end
   end
 end

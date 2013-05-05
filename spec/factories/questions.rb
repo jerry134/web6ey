@@ -25,6 +25,7 @@ FactoryGirl.define do
     factory :invalid_question do
       title nil
       content nil
+      close_reason nil
     end
   end
 end
