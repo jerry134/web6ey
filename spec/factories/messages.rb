@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :message do
-    user_id 1
-    answer_id 1
+    user
+    answer
     status MessageStatus::UN_READ
   end
 end
