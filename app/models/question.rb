@@ -10,12 +10,15 @@
 #  user_id       :integer
 #  viewed_count  :integer          default(0)
 #  answers_count :integer          default(0)
+#  closed        :boolean          default(false)
+#  close_reason  :text
 #
 
 class Question < ActiveRecord::Base
-  attr_accessible :content, :title, :tag_list
+  attr_accessible :content, :title, :tag_list, :close_reason
 
   validates_presence_of :title, :content, :user
+  validates_presence_of :close_reason, :if => Proc.new { |question| question.closed == true }
   validate :validation_of_tag_list
 
   acts_as_taggable
@@ -24,7 +27,7 @@ class Question < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
 
-  default_scope order("title")
+  default_scope where(closed: false).order("title")
   scope :with_no_answer, where(:answers_count => 0)
 
   def validation_of_tag_list

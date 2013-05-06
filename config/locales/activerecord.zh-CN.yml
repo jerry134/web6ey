@@ -20,6 +20,7 @@ zh-CN:
         title: "标题"
         content: "内容"
         tag_list: "标签"
+        close_reason: "关闭原因"
         created_at: "提问时间"
       tag:
         name: "标签名"

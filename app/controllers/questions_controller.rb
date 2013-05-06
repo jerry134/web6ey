@@ -75,4 +75,17 @@ class QuestionsController < ApplicationController
     Question.update_counters params[:question], viewed_count: 1
     render :nothing => true
   end
+
+  def closed
+    @question = Question.find(params[:id])
+    @question.closed = true
+
+    respond_to do |format|
+      if @question.update_attributes(params[:question])
+        format.html { redirect_to @question, notice: I18n.t("flash.actions.update.notice") }
+      else
+        format.html { redirect_to @question, alert: I18n.t("flash.actions.update.alert") }
+      end
+    end
+  end
 end
