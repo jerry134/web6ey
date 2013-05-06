@@ -14,6 +14,7 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(params[:answer])
     if current_user.answers << @answer
     #if @answer.save
+      Message.create({answer_id:@answer.id, status:MessageStatus::UN_READ, user_id:@question.user.id})  unless @answer.user == @question.user
       redirect_to @question , notice: I18n.t("flash.actions.create.notice")
     else
       render :new
