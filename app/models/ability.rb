@@ -10,7 +10,7 @@ class Ability
       can :read, :all
       can [:evaluate, :viewed], Question
       can :create, [Question, Answer]
-      can [:update, :destroy], Question do |question|
+      can [:update, :destroy, :closed], Question do |question|
         question.try(:user) == user
       end
       can [:update, :destroy], Answer do |answer|
