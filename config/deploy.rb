@@ -1,9 +1,5 @@
 #encoding:utf-8
-# add config/deploy to load_path
-$: << File.expand_path('../deploy/', __FILE__)
-
 require 'bundler/capistrano'
-require 'capistrano_database'
 
 set :application, "web6ey"
 #部署代码时从github上取代码
@@ -56,4 +52,15 @@ namespace :deploy do
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed"
   end
+
+  task :setup_config, roles: :app do
+    run "mkdir -p #{shared_path}/config"
+    put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
+  end
+  after "deploy:setup", "deploy:setup_config"
+
+  task :symlink_config, roles: :app do
+    run "ln -nfs #{shared_path}/config/database.yml  #{release_path}/config/database.yml"
+  end
+  after "deploy:finalize_update","deploy:symlink_config"
 end
