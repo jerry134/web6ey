@@ -12,6 +12,7 @@ gem 'execjs'
 gem 'devise'
 gem "cancan"
 gem 'simple_form'
+gem 'capistrano', group: :development
 gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
