@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = params[:no_answer].blank? ? Question : Question.with_no_answer
     @questions = @questions.tagged_with(params[:tag]) if params[:tag]
-    @questions = @questions.page(params[:page]).per_page(5)
+    @questions = @questions.unclosed.page(params[:page]).per_page(5)
   end
 
   # GET /questions/1

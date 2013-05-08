@@ -27,7 +27,7 @@ class Question < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
 
-  default_scope order("closed, title")
+  default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
   scope :closed, where(closed: true)
   scope :unclosed, where(closed: false)

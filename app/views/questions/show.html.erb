@@ -10,24 +10,30 @@
 
   <div class="span8">
     <%= simple_format @question.content %>
+    <% if @question.closed -%>
+    <h4>关闭原因:</h4>
+      <%= simple_format @question.close_reason %>
+      <% end %>
     <p class="text-right"><%= render_status_answer @question %></p>
   </div>
 </div>
 
-<div class="form-actions">
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_question_path(@question), :class => 'btn' if can? :update, @question %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              question_path(@question),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' if can? :destroy, @question %>
-  <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">关闭问题</a>
-</div>
+<% if can? :update, @question %>
+  <div class="form-actions">
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_question_path(@question), :class => 'btn' if can? :update, @question %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                question_path(@question),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' if can? :destroy, @question %>
+    <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">关闭问题</a>
+  </div>
+<% end %>
 
 <%= render "answers/answers", :question => @question%>
 <% unless exist_any_accept_answer? @question.answers%>
-  <% if can? :create, Answer -%>
+  <% if (can? :create, Answer) && (!@question.closed) -%>
     <%= render "answers/form" %>
   <% end -%>
 <% end %>
