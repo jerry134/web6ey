@@ -1,0 +1,20 @@
+base: &base
+  adapter: sqlite3
+  timeout: 5000
+development:
+  database: <%= shared_path %>/db/development.sqlite3
+  <<: *base
+test:
+  database: <%= shared_path %>/db/test.sqlite3
+  <<: *base
+production:
+  adapter: mysql2
+  host: <%= Capistrano::CLI.ui.ask("Enter MySQL database host ip: ") %>
+  database: <%= application %>
+  username: <%= Capistrano::CLI.ui.ask("Enter MySQL database usename: ") %>
+  password: <%= Capistrano::CLI.ui.ask("Enter MySQL database password: ") %>
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  reconnect: false
+
