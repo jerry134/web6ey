@@ -20,16 +20,16 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def render_status_counter
-    #FIXME need memcache
-    #@question ||= Question.all
-    content_tag :div do
-    I18n.t('counter_of_questions',  number: Question.count) + " , " +
-    I18n.t('counter_of_answers',  number: Answer.count) + " , " +
-    I18n.t('counter_of_rate',  rate: sprintf("%5.2f", Question.answer_coverage)) + " , " +
-    I18n.t('counter_of_users',  number: User.count)
-    end
-  end
+  #def render_status_counter
+    ##FIXME need memcache
+    ##@question ||= Question.all
+    #content_tag :div do
+    #I18n.t('counter_of_questions',  number: Question.count) + " , " +
+    #I18n.t('counter_of_answers',  number: Answer.count) + " , " +
+    #I18n.t('counter_of_rate',  rate: sprintf("%5.2f", Question.answer_coverage)) + " , " +
+    #I18n.t('counter_of_users',  number: User.count)
+    #end
+  #end
 
   def render_all_tags
     @tags = Tag.all

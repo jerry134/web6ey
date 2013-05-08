@@ -39,6 +39,7 @@ group :development do
   gem 'pry-nav'
   gem 'quiet_assets'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'capistrano'
 end
 
 group :development, :test do
@@ -53,17 +54,6 @@ group :test do
   gem 'simplecov', :require => false
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+group :production do
+  gem 'unicorn'
+end
