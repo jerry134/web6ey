@@ -40,12 +40,12 @@ namespace :deploy do
 
   desc "Stop Application"
   task :stop, :roles => :app do
-    run "kill -QUIT `cat #{current_path}/tmp/pids/unicorn.pid`"
+    run "kill -QUIT `cat #{shared_path}/pids/unicorn.#{application}.pid`"
   end
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "kill -USR2 `cat #{current_path}/tmp/pids/unicorn.pid`"
+    run "kill -USR2 `cat #{shared_path}/pids/unicorn.#{application}.pid`"
   end
 
   desc "Populates the Production Database"
