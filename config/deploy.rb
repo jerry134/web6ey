@@ -18,7 +18,7 @@ set :user, ENV['USER'] || "ruby"
 set :use_sudo, false
 
 # 部署路径修改为当前用户的目录，如果用默认的根目录且没有root权限会引起Permission denied的错误
-set :deploy_to, "/home/#{user}/u/apps/#{application}"
+set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache # 不要每次都获取全新的repository
 set :deploy_server, 'localhost'
 

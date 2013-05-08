@@ -3,8 +3,9 @@
 user ENV['USER'] || 'ruby', ENV['USER'] || 'ruby'
 
 # Set your full path to application.
+user = ENV['USER'] || 'ruby'
 application = "web6ey"
-app_path = "/home/#{user}/u/apps/#{application}"
+app_path = "/home/#{user}/apps/#{application}"
 shared_path = "#{app_path}/shared"
 current_path = "#{app_path}/current"
 
@@ -27,7 +28,7 @@ stderr_path "log/unicorn.log"
 stdout_path "log/unicorn.log"
 
 # Set master PID location
-pid "#{current_path}/tmp/pids/unicorn.pid"
+pid "#{shared_path}/pids/unicorn.#{application}.pid"
 
 if GC.respond_to?(:copy_on_write_friendly=)
     GC.copy_on_write_friendly = true
