@@ -35,8 +35,7 @@
           <div>views</div>
         </td>
         <td class='summary'>
-          <h3><%= link_to question.title, question_path(question), title:(question.title+'
-'+question.content)%></h3>
+          <h3><%= link_to question.title, question_path(question), title:(question.title+' '+question.content)%></h3>
           <div class='tags'>
             <%= format_tags question.tag_list, params[:no_answer] %>
           </div>

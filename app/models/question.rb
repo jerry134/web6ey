@@ -27,8 +27,10 @@ class Question < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   delegate :username, to: :user, allow_nil: true, prefix: 'owner'
 
-  default_scope where(closed: false).order("title")
+  default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
+  scope :closed, where(closed: true)
+  scope :unclosed, where(closed: false)
 
   def validation_of_tag_list
     if self.user.has_role?(:member) && !self.user.has_role?(:admin)
