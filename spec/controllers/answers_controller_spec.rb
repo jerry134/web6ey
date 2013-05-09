@@ -57,4 +57,55 @@ describe AnswersController do
       response.should render_template :new
     end
   end
+
+  describe "GET edit answer" do
+    it "returns failure of not signed in user" do
+      get :edit, question_id: question.id, id: answer.id
+      flash[:alert].should eq "继续操作请先登录。"
+      response.should_not be_success
+    end
+    it "return failure of invalid user" do
+      sign_in user
+      get :edit, question_id: question.id, id: answer.id
+      response.should_not be_success
+    end
+    it "return success of valid user" do
+      sign_in answer.user
+      get :edit, question_id: question.id, id: answer.id
+      response.should be_success
+    end
+  end
+
+  describe "PUT update answer" do
+    it "return failure of not signed in user" do
+      put :update, question_id: question.id, id: answer.id, answer: valid_attributes
+      flash[:alert].should eq "继续操作请先登录。"
+      response.should_not be_success
+    end
+    it "return success of valid user" do
+      sign_in answer.user
+      put :update, question_id: question.id, id: answer.id, answer: valid_attributes
+      response.should redirect_to question
+      flash[:notice].should eq "更新成功。"
+    end
+    it "re-render the edit template of invalid attributes" do
+      sign_in answer.user
+      put :update, question_id: question.id, id: answer.id, answer: invalid_attributes
+      response.should render_template :edit
+    end
+  end
+ 
+  describe "DELETE destroy answer" do
+    it "return failure of not signed in user" do
+      delete :destroy, question_id: question.id, id: answer.id
+      flash[:alert].should eq "继续操作请先登录。"
+      response.should_not be_success
+    end
+    it "return success of valid user" do
+      sign_in answer.user
+      delete :destroy, question_id: question.id, id: answer.id
+      flash[:notice].should eq "删除成功。"
+      response.should redirect_to question
+    end
+  end 
 end

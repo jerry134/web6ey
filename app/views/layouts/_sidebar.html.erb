@@ -2,9 +2,34 @@
             new_question_path,
             :class => 'btn btn-primary' if can? :create, Question %>
 <hr>
-<h4><%= render_status_counter%></h4>
 
-<hr>
+<div class='well'>
+  <h4>社区状态</h4>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td><%= number_with_delimiter Question.count %></td>
+        <td>问题</td>
+      </tr>
+      <tr>
+        <td><%= number_with_delimiter Answer.count %></td>
+        <td>回答</td>
+      </tr>
+      <tr>
+        <td><%= number_to_percentage( Question.answer_coverage, :precision => 2) %></td>
+        <td>回答率</td>
+      </tr>
+      <tr>
+        <td><%= number_with_delimiter User.count %></td>
+        <td>注册用户</td>
+      </tr>
+      <tr>
+        <td><%= number_with_delimiter User.where(:current_sign_in_at => Date.today..Date.tomorrow ).count %></td>
+        <td>今天访问者</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <h3><%=t 'tag_names_list'%></h3>
 <div id='tag_cloud' class="row">

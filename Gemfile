@@ -12,12 +12,18 @@ gem 'execjs'
 gem 'devise'
 gem "cancan"
 gem 'simple_form'
+gem 'capistrano', group: :development
+gem 'rvm-capistrano', group: :development
+#gem 'capistrano-ext', group: :development
 gem 'will_paginate', '> 3.0'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
 gem 'carrierwave'
 gem 'capybara'
+gem 'passenger', group: :production
+# for enumerate
+gem "enumerate_it", "~> 1.0.3"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -37,6 +43,7 @@ group :development do
   gem 'pry-nav'
   gem 'quiet_assets'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'capistrano'
 end
 
 group :development, :test do
@@ -51,17 +58,6 @@ group :test do
   gem 'simplecov', :require => false
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+group :production do
+  gem 'unicorn'
+end

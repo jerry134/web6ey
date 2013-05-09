@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = params[:no_answer].blank? ? Question : Question.with_no_answer
     @questions = @questions.tagged_with(params[:tag]) if params[:tag]
-    @questions = @questions.page(params[:page]).per_page(5)
+    @questions = @questions.unclosed.page(params[:page]).per_page(5)
   end
 
   # GET /questions/1
@@ -74,5 +74,18 @@ class QuestionsController < ApplicationController
   def viewed
     Question.update_counters params[:question], viewed_count: 1
     render :nothing => true
+  end
+
+  def closed
+    @question = Question.find(params[:id])
+    @question.closed = true
+
+    respond_to do |format|
+      if @question.update_attributes(params[:question])
+        format.html { redirect_to @question, notice: I18n.t("flash.actions.update.notice") }
+      else
+        format.html { redirect_to @question, alert: I18n.t("flash.actions.update.alert") }
+      end
+    end
   end
 end

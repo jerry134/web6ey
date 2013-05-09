@@ -1,20 +1,22 @@
 <% @answers.each do |answer| %>
 
   <div class="row">
-    <div class="span9"><%= simple_format answer.content%></div>
-  </div>
-
-  <div class="row">
+  <% unless exist_any_accept_answer? @answers%>
+    <div class="span2">
+    <%= button_to t('helpers.button.accept'),accept_question_answers_path(answer_id: answer.id, question_id: question.id), {class: 'btn btn-small'}%>
+    </div>
+  <% end %>
     <% if answer.accept%>
       <div class="span2" style="color:red;"><%= t "accept_answer"%></div>
-      <div class="span2 offset6"><%= simple_format answer.user.username%></div>
-    <% else %>
-      <div class="span1 offset8"><%= simple_format answer.user.username%></div>
     <% end %>
+    <div class="span9"><%= simple_format answer.content %></div>
   </div>
-
-  <% unless exist_any_accept_answer? @answers%>
-    <%= button_to 'accept',accept_question_answers_path(answer_id: answer.id, question_id: question.id), {class: 'btn btn-small'}%>
-  <% end %>
+  <div class="row">
+    <div class="text-right">
+      <%= link_to t("helpers.links.edit"), edit_question_answer_path(question, answer) if can? :update, answer %>
+      <%= link_to t("helpers.links.destroy"), [question,answer], method: :delete, confirm: t('helpers.links.confirm') if can? :destroy, answer %>
+      <%= answer.user.username %>
+    </div>
+  </div>
   <hr>
 <% end %>
