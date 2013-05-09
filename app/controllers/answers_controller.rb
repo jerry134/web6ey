@@ -20,14 +20,33 @@ class AnswersController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+    @answer = @question.answers.find(params[:id])
+  end
+
+  def update
+    @answer = @question.answers.find(params[:id])
+    if @answer.update_attributes(params[:answer])
+      redirect_to @question, notice: I18n.t("flash.actions.update.notice")
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @answer = @question.answers.find(params[:id])
+    @answer.destroy
+    redirect_to @question, notice: I18n.t("flash.actions.destory.notice") 
+  end
 
   def accept
     @answer = Answer.find(params[:answer_id])
     @answer.accept = true
     if @answer.save
-      flash[:false] = "accept false"
-    else
       flash[:success] = "accept success"
+    else
+      flash[:false] = "accept false"
     end
     redirect_to "/questions/" + params[:question_id]
   end

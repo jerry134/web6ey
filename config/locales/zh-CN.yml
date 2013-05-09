@@ -10,3 +10,7 @@ zh-CN:
   tag_names_list : "标签云"
   your_answer : "我来回答"
   accept_answer : "采纳的答案"
+  sign_up: "注册"
+  login: "登录"
+  logout: "退出"
+  edit_profile: "修改个人资料"

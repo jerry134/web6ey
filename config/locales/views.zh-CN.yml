@@ -34,7 +34,10 @@ zh-CN:
       detail: "详情"
       all: "所有"
       more: "更多..."
+    button:
+      accept: "采纳"
     titles:
       tag: "新标签"
       question: "新问题"
+      edit_answer: "修改问题"
 
