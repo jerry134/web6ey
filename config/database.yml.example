@@ -5,7 +5,7 @@ defaults: &defaults
   reconnect: false
   pool: 5
   username: root
-  password: password
+  password: root
 
 development:
   <<: *defaults
@@ -15,14 +15,14 @@ test:
   <<: *defaults
   database: bey6_test
 
-#production:
-  #<<: *defaults
-  #database: bey6
-
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: test-postgres_production
-  pool: 5
-  username: test-postgres
-  password:
+  <<: *defaults
+  database: web6ey
+
+#production:
+  #adapter: postgresql
+  #encoding: unicode
+  #database: test-postgres_production
+  #pool: 5
+  #username: test-postgres
+  #password:

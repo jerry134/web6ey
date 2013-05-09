@@ -6,6 +6,7 @@
     <%= f.input :tag_list, collection: Question.tag_counts.map(&:name), input_html: {class: 'tag_list span6', multiple: true} %>
   <% end -%>
   <%= f.input :content, input_html: {rows: 15, class: 'span6'} %>
+  <%= f.input :closed if current_user.has_role? :admin %>
   <%-# @question.owner_username %>
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>

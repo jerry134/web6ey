@@ -1,49 +1,66 @@
-require "bundler/capistrano"
+#encoding:utf-8
+require 'bundler/capistrano'
 
 set :application, "web6ey"
-#set :scm, :git
-#set :repository,  "git://github.com/jerry134/web6ey.git"
-#set :scm, :none
-set :repository,  '.'
-set :deploy_via, :copy
+#部署代码时从github上取代码
+#set :repository, "git://github.com/jerry134/web6ey.git"
+#部署代码时从本地取代码,更快些
+set :repository, File.expand_path('../../.git/', __FILE__)
+#set :branch, "master"
 
-set :default_env,     'production'
-set :rails_env,       ENV['rails_env'] || ENV['RAILS_ENV'] || default_env
-set :deploy_to,       "/var/www/#{application}_#{rails_env}"
-set :keep_releases,   3
-#set :deploy_via,      :remote_cache
-#set :normalize_asset_timestamps, false
-set :user,            "ken"
-set :group,           "ken"
-set :location, "192.34.61.70"
-ssh_options[:forward_agent] = true
-default_run_options[:pty] = true
+set :scm, :git
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :user, ENV['USER'] || "ruby"
+set :use_sudo, false
 
-role :web, location                          # Your HTTP server, Apache/etc
-role :app, location                          # This may be the same as your `Web` server
-role :db,  location, :primary => true # This is where Rails migrations will run
+# 部署路径修改为当前用户的目录，如果用默认的根目录且没有root权限会引起Permission denied的错误
+set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_via, :remote_cache # 不要每次都获取全新的repository
+set :deploy_server, 'localhost'
+
+set :bundle_without,  [:development, :test]
+
+# for rbenv
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p392"
+set :default_environment, {
+  'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
+  'RBENV_VERSION' => "#{rbenv_version}",
+}
+
+role :web, "#{deploy_server}"                          # Your HTTP server, Apache/etc
+role :app, "#{deploy_server}"                          # This may be the same as your `Web` server
+role :db,  "#{deploy_server}", :primary => true        # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
-#before "deploy", "deploy:setup"
-#after "deploy:restart", "deploy:cleanup" 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-# Add RVM's lib directory to the load path.
 
-# Load RVM's capistrano plugin.    
-require "rvm/capistrano"
-set :rvm_ruby_string, '1.9.3'
+namespace :deploy do
+  desc "Start Application"
+  task :start, :roles => :app do
+    run "cd #{current_path}; RAILS_ENV=production bundle exec unicorn_rails -c config/unicorn.rb -D"
+  end
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+  desc "Stop Application"
+  task :stop, :roles => :app do
+    run "kill -QUIT `cat #{shared_path}/pids/unicorn.#{application}.pid`"
+  end
 
-# If you are using Passenger mod_rails uncomment this:
- namespace :deploy do
-   task :start do ; end
-   task :stop do ; end
-   task :restart, :roles => :app, :except => { :no_release => true } do
-     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-   end
- end
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    run "kill -USR2 `cat #{shared_path}/pids/unicorn.#{application}.pid`"
+  end
+
+  desc "Populates the Production Database"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed"
+  end
+
+  task :setup_config, roles: :app do
+    run "mkdir -p #{shared_path}/config"
+    put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
+  end
+  after "deploy:setup", "deploy:setup_config"
+
+  task :symlink_config, roles: :app do
+    run "ln -nfs #{shared_path}/config/database.yml  #{release_path}/config/database.yml"
+  end
+  after "deploy:finalize_update","deploy:symlink_config"
+end
