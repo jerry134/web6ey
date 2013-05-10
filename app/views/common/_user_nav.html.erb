@@ -8,12 +8,12 @@
         <b class='caret'></b>
       </a>
       <ul class="dropdown-menu">
-      <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></lia>
+      <li><%= link_to t('edit_profile'), edit_user_registration_path %></li>
+      <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></lia>
       </ul>
     <% else %>
-      <li><%= link_to "Sign up", new_user_registration_path %></li>
-      <li><%= link_to "Login", new_user_session_path %></li>
+      <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+      <li><%= link_to t('login'), new_user_session_path %></li>
     <% end %>
   </li>
 </ul>
