@@ -7,6 +7,11 @@ Web6bey::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
+  resources :messages, :only => [:index, :destroy], :path => 'notifications' do
+    collection do
+      post 'clear'
+    end
+  end
   resources :questions do
     resources :answers do
       post :accept, on: :collection
@@ -15,6 +20,7 @@ Web6bey::Application.routes.draw do
       post 'evaluate'
       post 'viewed'
     end
+    post :closed, on: :member
   end
 
   # The priority is based upon order of creation:

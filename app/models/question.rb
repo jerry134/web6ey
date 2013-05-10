@@ -10,12 +10,15 @@
 #  user_id       :integer
 #  viewed_count  :integer          default(0)
 #  answers_count :integer          default(0)
+#  closed        :boolean          default(false)
+#  close_reason  :text
 #
 
 class Question < ActiveRecord::Base
-  attr_accessible :content, :title, :tag_list
+  attr_accessible :content, :title, :tag_list, :close_reason
 
   validates_presence_of :title, :content, :user
+  validates_presence_of :close_reason, :if => Proc.new { |question| question.closed == true }
   validate :validation_of_tag_list
 
   acts_as_taggable
@@ -26,6 +29,8 @@ class Question < ActiveRecord::Base
 
   default_scope order("title")
   scope :with_no_answer, where(:answers_count => 0)
+  scope :closed, where(closed: true)
+  scope :unclosed, where(closed: false)
 
   def validation_of_tag_list
     if self.user.has_role?(:member) && !self.user.has_role?(:admin)
@@ -38,5 +43,11 @@ class Question < ActiveRecord::Base
 
   def vote_count score
     QuestionEvaluation.where(score: score ,question_id: id).size
+  end
+
+  class << self
+    def answer_coverage
+      (1-with_no_answer.count / count.to_f) * 100
+    end
   end
 end

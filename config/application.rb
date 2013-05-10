@@ -74,5 +74,7 @@ module Web6bey
       g.helper_specs false
       g.view_specs false
     end
+
+    config.autoload_paths << "#{Rails.root}/app/enumerations"
   end
 end

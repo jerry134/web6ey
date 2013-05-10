@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :user_roles
   has_many :questions
   has_many :answers
+  has_many :messages, :dependent => :destroy
+  has_many :unread_messages, :class_name => 'Message', :conditions=>{:status=>MessageStatus::UN_READ}
 
   before_create :update_roles_of_user
   def update_roles_of_user

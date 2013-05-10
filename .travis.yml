@@ -1,15 +1,19 @@
 # .travis.yml
 language: ruby
+
+bundler_args: --without production development
+
 rvm:
   - 1.9.3
+
 env:
   - DB=mysql
   #- DB=postgresql
-script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
+
+script: bundle exec rake spec
+
 before_script:
   - cp config/database.travis.yml config/database.yml
-  - mysql -e 'create database web6ey_test'
+  - bundle exec rake db:drop db:create db:schema:load --trace 2>&1
+  #- mysql -e 'create database web6ey_test'
   #- psql -c 'create database web6ey_test' -U postgres
