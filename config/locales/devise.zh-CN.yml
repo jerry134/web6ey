@@ -57,3 +57,4 @@ zh-CN:
       not_saved:
         one: ! '因为1个错误导致此%{resource}保存失败:'
         other: ! '因为%{count}个错误导致此%{resource}保存失败:'
+  remember_me: 记住我
